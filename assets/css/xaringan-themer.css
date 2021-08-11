@@ -44,8 +44,8 @@
 
   /* Colors */
   --text-color: #040F0F;
-  --header-color: #248232; 
-  --background-color: #FCFFFC; 
+  --header-color: #248232;
+  --background-color: #FCFFFC;
   --link-color: #2BA84A;
   --text-bold-color: #0C9347;
   --code-highlight-color: rgba(255,255,0,0.8);
@@ -135,7 +135,7 @@ a, a > code {
 .footnote {
   position: absolute;
   text-align: center;
-  bottom: 30px;
+  bottom: 15px;
   font-size: 0.9em;
 }
 .remark-code-line-highlighted {
@@ -173,7 +173,7 @@ a, a > code {
   color: #088B36;
 }
 .right-column {
-  width: 78%;  
+  width: 78%;
   height: 96%;
   float: right;
 /*  padding-top: 1em; */
@@ -185,6 +185,7 @@ a, a > code {
 .pull-right-narrow {
   float: right;
   width: 36%;
+  height: 96%;
 }
 .pull-left {
   float: left;
@@ -251,7 +252,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   width: 100%;
   background: var(--header-background-color);
   color: var(--header-background-text-color);
-  padding: 2rem 64px 1.5rem 64px;
+  padding: 1.5rem 64px 1.5rem 64px;
   margin-top: 0;
   box-sizing: border-box;
 }
