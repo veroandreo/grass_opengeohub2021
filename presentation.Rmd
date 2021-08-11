@@ -318,12 +318,18 @@ class: grass-slide
 ---
 class: grass-slide
 
+.pull-right-narrow[
+<img src="assets/img/temporal_modules.png" width="110%">
+]
+
 ## Temporal modules
 
+.pull-left-wide[
 - **t.\***: General modules to handle STDS of all types
 - **t.rast.\***: Modules that deal with STRDS
 - **t.rast3d.\***: Modules that deal with STR3DS
 - **t.vect.\***: Modules that deal with STVDS
+]
 
 ---
 
@@ -349,7 +355,7 @@ class: grass-slide
 .right-column[<img src="assets/img/tgrass_flowchart.png" width="91%">]
 
 ---
-class: grass-slide center middle
+class: grass-slide center
 
 ## Hands-on to space-time analysis for disease ecology with GRASS GIS and `r fa("r-project", fill="#276dc2", width = "2em")` 
 
@@ -361,14 +367,14 @@ class: grass-slide
 Habitat suitability mapping for the Asian tiger mosquito in Northern Italy
 
 .pull-left[
-- GRASS
+- **GRASS**
   - Import species records
   - Create random background points
   - Create different environmental layers from LST daily data
 ]
 
 .pull-right[
-- R
+- **R**
   - Read data from GRASS into R
   - Model species distribution
   - Model evaluation 
@@ -381,9 +387,7 @@ Habitat suitability mapping for the Asian tiger mosquito in Northern Italy
 
 .pull-left[
 - Records of *Aedes albopictus* (Asian tiger mosquito) in Northern Italy downloaded from [GBIF](https://www.gbif.org/)
-- Environmental layers derived from LST
-  - MODIS LST reconstructed by [mundialis](https://www.mundialis.de/en/) based on [Metz et al. 2017](https://www.mdpi.com/2072-4292/9/12/1333/htm)
-  - Daily average LST
+- Daily MODIS LST reconstructed by [mundialis](https://www.mundialis.de/en/) based on [Metz et al. 2017](https://www.mdpi.com/2072-4292/9/12/1333/htm)
   - 1 km spatial resolution
   - Converted to Celsius degrees
 ]
@@ -418,8 +422,9 @@ Your folder's tree should look like:
 .left-column[
 ## Let's start GRASS GIS!
 
-### Fear not!
 `r emo::ji("surprised")`
+
+### Fear not!
 ]
 
 .right-column[
@@ -441,9 +446,7 @@ Your folder's tree should look like:
 ]
 
 .pull-right[
-
-<img src="assets/img/grass_database.png" width="950%">
-
+<img src="assets/img/grass_database.png" width="950px">
 ]
 
 ---
@@ -492,7 +495,8 @@ It can be set and changed by means of [g.region](https://grass.osgeo.org/grass-s
 class: grass-slide center
 
 # Now we are ready to start
-<!-- add emoji here -->
+
+# `r emo::ji("runner")`
 
 ---
 
@@ -607,6 +611,8 @@ t.info input=lst_daily
 ]
 ]
 
+.footnote[See [t.create]() and [t.register]()]
+
 ---
 
 ### Generate environmental variables from LST STRDS
@@ -630,7 +636,7 @@ done
 
 ```
 
-.footnote[See [t.rast.series]() manual for further details]
+.footnote[See [t.rast.series](https://grass.osgeo.org/grass-stable/manuals/t.rast.series.html) manual for further details]
 
 ---
 
@@ -651,12 +657,14 @@ r.bioclim \
 g.list type=raster pattern="worldclim*"
 ```
 
-.footnote[See [r.bioclim]() manual for further details]
+.footnote[See [r.bioclim](https://grass.osgeo.org/grass-stable/manuals/addons/r.bioclim.html) manual for further details]
 
 ---
 
 #### Spring warming
 
+.panelset[
+.panel[.panel-name[Code]
 ```bash
 # Annual spring warming: slope(daily Tmean february-march-april)
 t.rast.aggregate input=lst_daily output=annual_spring_warming \
@@ -671,13 +679,20 @@ t.rast.series input=annual_spring_warming \
   output=avg_spring_warming \
   method=average
 ```
-<!-- add screenshot -->
-.footnote[See [t.rast.aggregate]() manual for further details]
+]
+.panel[.panel-name[Plot]
+.center[<img src="assets/img/spring_warming.png" width="50%">]
+]
+]
+
+.footnote[See [t.rast.aggregate](https://grass.osgeo.org/grass-stable/manuals/t.rast.aggregate.html) manual]
 
 ---
 
 #### Autumnal cooling
 
+.panelset[
+.panel[.panel-name[Code]
 ```bash
 # Annual autumnal cooling: slope(daily Tmean august-september-october)
 t.rast.aggregate input=lst_daily output=annual_autumnal_cooling \
@@ -692,11 +707,18 @@ t.rast.series input=annual_autumnal_cooling \
   output=avg_autumnal_cooling \
   method=average
 ```
-<!-- add screenshot -->
+]
+.panel[.panel-name[Plot]
+.center[<img src="assets/img/autumnal_cooling.png" width="50%">]
+]
+]
+
 ---
 
 #### Number of days with LSTmean >= 20 and <= 30
 
+.panelset[
+.panel[.panel-name[Code]
 ```bash
 # Keep only pixels meeting the condition
 t.rast.algebra -n \
@@ -713,8 +735,13 @@ t.rast.aggregate input=tmean_higher20_lower30 \
 t.rast.series input=count_tmean_higher20_lower30 \
   output=avg_count_tmean_higher20_lower30 method=average
 ```
+]
+.panel[.panel-name[Plot]
+.center[<img src="assets/img/count_days_higher20_lower30.png" width="50%">]
+]
+]
 
-.footnote[See [t.rast.algebra]() manual for further details]
+.footnote[See [t.rast.algebra](https://grass.osgeo.org/grass-stable/manuals/t.rast.algebra.html) manual for further details]
 
 ---
 layout: true
@@ -753,15 +780,19 @@ t.rast.list input=lower_m2_consec_days \
 t.rast.series input=lower_m2_consec_days \
   output=median_lower_m2_consec_days method=median
 ```
-<!-- add screenshot -->
+
+---
+
+.center[<img src="assets/img/median_days_lower_m2.png" width="60%">]
 
 ---
 layout: false
-class: grass-slide
+class: grass-slide hide_logo
 
 ## We have all these maps in GRASS, how do we connect with R now?
 
-<!-- add emoji -->
+# `r emo::ji("confused")`
+
 ---
 
 ## [**rgrass7**](https://cran.r-project.org/web/packages/rgrass7/index.html)
@@ -772,8 +803,7 @@ class: grass-slide
 - `readVECT()` and `readRAST()`: read vector and raster maps from GRASS into *sf* or *sp* objects 
 - `writeVECT()` and `writeRAST()`: write *sf* or *sp* objects into GRASS GIS database
 
-
-.footnote[`r emo::ji("announcement")` Volunteers needed!!
+.footnote[`r emo::ji("announcement")` Volunteers needed!!]
 
 ---
 layout: true
@@ -783,17 +813,17 @@ layout: true
 ---
 
 .pull-left[
-A. Using [R within a GRASS GIS session](https://grasswiki.osgeo.org/wiki/R_statistics/rgrass7#R_within_GRASS), i.e. starting R (or RStudio) from the GRASS GIS terminal
+A. Using [R within a GRASS GIS session](https://grasswiki.osgeo.org/wiki/R_statistics/rgrass7#R_within_GRASS), i.e. starting R (or RStudio) from GRASS terminal
 <br>
   - type `R` or `rstudio &` in the GRASS GIS terminal
   - load `rgrass7` library
   - use `readVECT()`, `readRAST()` to read data from GRASS into R
-  - access GRASS GIS funtionalities and database through `execGRASS()`
+  - access GRASS GIS modules and database through `execGRASS()`
   - write data (back) to GRASS database with `writeVECT()` and `writeRAST()`
 ]
 
 .pull-right[
-<img src="assets/img/grass_terminal_calling_R.png" width="90%">
+<img src="assets/img/grass_terminal_calling_R.png" width="87%">
 ]
 
 ---
@@ -802,7 +832,7 @@ A. Using [R within a GRASS GIS session](https://grasswiki.osgeo.org/wiki/R_stati
 B. Using [GRASS GIS within an R session](https://grasswiki.osgeo.org/wiki/R_statistics/rgrass7#GRASS_within_R), i.e. we connect to GRASS GIS database from within R (or RStudio).
 <br>
   - we need to start GRASS GIS with `initGRASS()` 
-  - we access GRASS GIS funtionalities through `execGRASS()` 
+  - we access GRASS GIS modules through `execGRASS()` 
 
 > Originally intended to apply GRASS functions on data outside GRASS DB; hence some prefer to create throw away locations
 ]
@@ -813,14 +843,18 @@ B. Using [GRASS GIS within an R session](https://grasswiki.osgeo.org/wiki/R_stat
 
 ---
 layout: false
+class: grass-slide center hide_logo
 
 # Let's move to `r fa("r-project", fill="#276dc2")`
 
 ---
 
-#### Option 2: Close GRASS, open Rstudio and run:
+#### Option B: Close GRASS, open Rstudio and run:
 
-```{r message=FALSE}
+.panelset[
+.panel[.panel-name[Code]
+
+```{r grass_init, results='hide', message=FALSE}
 library(rgrass7)
 
 # path to GRASS binaries
@@ -836,8 +870,16 @@ myMapset <- "italy_LST_daily"
 initGRASS(gisBase = myGRASS, home = tempdir(), gisDbase = myGISDbase, 
           location = myLocation, mapset = myMapset, override = TRUE)
 ```
+]
 
-<!-- poner paneles -->
+.panel[.panel-name[Output]
+```{r ref.label='grass_init', echo=FALSE, size="\tiny"}
+# start GRASS GIS from R
+initGRASS(gisBase = myGRASS, home = tempdir(), gisDbase = myGISDbase, 
+          location = myLocation, mapset = myMapset, override = TRUE)
+```
+]
+]
 
 ---
 ### Within R...
@@ -852,12 +894,11 @@ library(biomod2)
 ```
 
 ---
-layout: true
 
 #### Read vector data
 
----
-
+.panelset[
+.panel[.panel-name[Code]
 ```{r read_vectors, message=FALSE, warning=FALSE, results='hide'}
 # Use sf for vectors
 use_sf()
@@ -867,12 +908,19 @@ Aa_pres <- readVECT("aedes_albopictus")
 background <- readVECT("background_points")
 ```
 
----
-
-```{r plot_vectors, message=FALSE, warning=FALSE}
+```{r plot, message=FALSE, warning=FALSE, results='hide'}
 # Quick visualization in mapview
-mapview(Aa_pres) + mapview(background, color="black", col.regions="black", cex=2)
+mapview(Aa_pres) + 
+  mapview(background, color="black", col.regions="black", cex=2)
 ```
+]
+.panel[.panel-name[Output]
+```{r ref.label='plot', warning=FALSE, echo=FALSE}
+mapview(Aa_pres) + 
+  mapview(background, color="black", col.regions="black", cex=2)
+```
+]
+]
 
 ---
 layout: true 
@@ -932,6 +980,7 @@ myRespXY <- rbind(st_coordinates(Aa_pres),
 
 ```{r data_prep2, message=FALSE, warning=FALSE, results='hide'}
 # Explanatory variables
+
 # Stack raster layers
 myExpl <- raster::stack(predictors)
 
@@ -1000,7 +1049,9 @@ get_variables_importance(myBiomodModelOut)
 
 #### Model predictions
 
-```{r model_projection, message=FALSE, warning=FALSE, results='hide'}
+.panelset[
+.panel[.panel-name[Code]
+```{r model_projection, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
 # Set parameters for model projection
 myBiomodProj <- BIOMOD_Projection(
                 modeling.output = myBiomodModelOut, 
@@ -1012,17 +1063,19 @@ myBiomodProj <- BIOMOD_Projection(
 
 # Obtain predictions
 mod_proj <- get_predictions(myBiomodProj)
-mod_proj
-```
-<!-- hacer paneles -->
----
 
-#### Model predictions
-
-```{r plot_model_proj, message=FALSE, warning=FALSE}
 # Plot predicted model
-plot(mod_proj)
+plot(mod_proj[[1]])
 ```
+]
+
+.panel[.panel-name[Output]
+```{r plot_model_proj, message=FALSE, warning=FALSE, echo=FALSE, fig.width=6.5, fig.height=3.5}
+# Plot predicted model
+plot(mod_proj[[1]])
+```
+]
+]
 
 ---
 
@@ -1041,7 +1094,8 @@ for(i in seq_along(1:length(mod_proj@layers))){
 }
 
 # Check it's there
-execGRASS("g.list", parameters = list(type = "raster", pattern = "maxent*"))
+execGRASS("g.list", parameters = list(type = "raster", 
+                                      pattern = "maxent*"))
 ```
 
 ---
@@ -1051,14 +1105,14 @@ class: center, middle
 
 ---
 
-# GRASS GIS HELP!!! `r emo::ji("help")`
+# `r emo::ji("help")` GRASS GIS HELP!!! `r emo::ji("help")`
 
 - [g.manual](https://grass.osgeo.org/grass76/manuals/g.manual.html):
   in the main GUI under Help or just pressing *F1*
 - `--help` or `--h` flag after the module name in the terminal
 - [GRASS website](https://grass.osgeo.org/): rich [learn](https://grass.osgeo.org/learn/) section with links to videos, tutorials, courses, books, etc.
 - [GRASS wiki](https://grasswiki.osgeo.org/wiki/GRASS-Wiki): examples,
-  explanations and help on particular modules or tasks,
+  explanations on particular modules or tasks,
   [tutorials](https://grasswiki.osgeo.org/wiki/Category:Tutorial),
   applications, etc.
 - grass-user mailing list: [subscribe](https://lists.osgeo.org/mailman/listinfo/grass-user) and post or check the [archives](https://lists.osgeo.org/pipermail/grass-user/)
