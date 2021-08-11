@@ -1,0 +1,25 @@
+[general]
+creator=R package 'raster'
+created=2021-08-11 16:10:33
+[georeference]
+nrows=438
+ncols=582
+xmin=4053000
+ymin=2228000
+xmax=4635000
+ymax=2666000
+projection=+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs
+[data]
+datatype=INT2S
+byteorder=little
+nbands=3
+bandorder=BIL
+minvalue=0:0:0
+maxvalue=632:1000:1000
+nodatavalue=-9999
+[legend]
+legendtype=
+values=
+color=
+[description]
+layername=Aedes.albopictus_AllData_RUN1_MAXENT.Phillips:Aedes.albopictus_AllData_RUN2_MAXENT.Phillips:Aedes.albopictus_AllData_RUN3_MAXENT.Phillips
