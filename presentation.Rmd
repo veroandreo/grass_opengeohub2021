@@ -383,6 +383,10 @@ Habitat suitability mapping for the Asian tiger mosquito in Northern Italy
 
 ---
 
+<!-- a plot about SDM -->
+
+---
+
 ### Data for the session
 
 .pull-left[
@@ -403,8 +407,8 @@ Habitat suitability mapping for the Asian tiger mosquito in Northern Italy
 ### `r fa("download")` Get sample location, mosquito records and code `r fa("download")`
 
 - Create a folder named `grassdata_ogh`
-- Download and unzip [eu_laea location with LST mapset]() and unzip within your `grassdata_ogh` folder
-- Download asian tiger [mosquito occurrences]() as `.gpkg` file
+- Download and unzip [eu_laea location with LST mapset](https://zenodo.org/record/3564515) and unzip within your `grassdata_ogh` folder
+- Download asian tiger [mosquito occurrences](https://github.com/veroandreo/grass_opengeohub2021/raw/master/data/aedes_albopictus.gpkg) as `.gpkg` file
 - Download [GRASS script]()
 - Download [R script]()
 
@@ -503,7 +507,7 @@ class: grass-slide center
 #### Importing species records
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[GRASS code]
 
 ```bash
 # Import records
@@ -523,7 +527,7 @@ d.vect aedes_albopictus icon=basic/circle \
 ```
 ]
 
-.panel[.panel-name[Plot]
+.panel[.panel-name[Map]
 .center[<img src="assets/img/wx0_aedes_lst.png" width="600px">]
 ]
 ]
@@ -531,7 +535,7 @@ d.vect aedes_albopictus icon=basic/circle \
 ---
 class: middle
 
-If you'd need to start from scratch:
+#### If you'd need to start from scratch:
 
 ```bash
 # Set computational region
@@ -555,7 +559,7 @@ v.in.pygbif output=aedes_albopictus \
 #### Creating random background points
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[GRASS code]
 
 ```bash
 # Create buffer around Aedes albopictus records
@@ -576,7 +580,7 @@ v.random output=background_points npoints=1000 \
 ```
 ]
 
-.panel[.panel-name[Plot]
+.panel[.panel-name[Map]
 .center[<img src="assets/img/points_aedes_background.png" width="700px">]
 ]
 ]
@@ -586,7 +590,7 @@ v.random output=background_points npoints=1000 \
 #### Create daily LST STRDS
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[GRASS code]
 
 ```bash
 # Create time series 
@@ -638,6 +642,7 @@ done
 
 .footnote[See [t.rast.series](https://grass.osgeo.org/grass-stable/manuals/t.rast.series.html) manual for further details]
 
+<!-- poner paneles con un output -->
 ---
 
 #### Bioclimatic variables
@@ -658,13 +663,13 @@ g.list type=raster pattern="worldclim*"
 ```
 
 .footnote[See [r.bioclim](https://grass.osgeo.org/grass-stable/manuals/addons/r.bioclim.html) manual for further details]
-
+<!-- poner paneles con un output -->
 ---
 
 #### Spring warming
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[GRASS code]
 ```bash
 # Annual spring warming: slope(daily Tmean february-march-april)
 t.rast.aggregate input=lst_daily output=annual_spring_warming \
@@ -680,7 +685,7 @@ t.rast.series input=annual_spring_warming \
   method=average
 ```
 ]
-.panel[.panel-name[Plot]
+.panel[.panel-name[Map]
 .center[<img src="assets/img/spring_warming.png" width="50%">]
 ]
 ]
@@ -692,7 +697,7 @@ t.rast.series input=annual_spring_warming \
 #### Autumnal cooling
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[GRASS code]
 ```bash
 # Annual autumnal cooling: slope(daily Tmean august-september-october)
 t.rast.aggregate input=lst_daily output=annual_autumnal_cooling \
@@ -708,7 +713,7 @@ t.rast.series input=annual_autumnal_cooling \
   method=average
 ```
 ]
-.panel[.panel-name[Plot]
+.panel[.panel-name[Map]
 .center[<img src="assets/img/autumnal_cooling.png" width="50%">]
 ]
 ]
@@ -718,7 +723,7 @@ t.rast.series input=annual_autumnal_cooling \
 #### Number of days with LSTmean >= 20 and <= 30
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[GRASS code]
 ```bash
 # Keep only pixels meeting the condition
 t.rast.algebra -n \
@@ -736,7 +741,7 @@ t.rast.series input=count_tmean_higher20_lower30 \
   output=avg_count_tmean_higher20_lower30 method=average
 ```
 ]
-.panel[.panel-name[Plot]
+.panel[.panel-name[Map]
 .center[<img src="assets/img/count_days_higher20_lower30.png" width="50%">]
 ]
 ]
@@ -776,7 +781,7 @@ t.rast.algebra \
 t.rast.list input=lower_m2_consec_days \
   columns=name,start_time,end_time,min,max
 
-# Median number of consecutive days with LSTmean >= 33
+# Median number of consecutive days with LSTmean <= -2
 t.rast.series input=lower_m2_consec_days \
   output=median_lower_m2_consec_days method=median
 ```
@@ -787,7 +792,7 @@ t.rast.series input=lower_m2_consec_days \
 
 ---
 layout: false
-class: grass-slide hide_logo
+class: grass-slide hide_logo center
 
 ## We have all these maps in GRASS, how do we connect with R now?
 
@@ -852,12 +857,12 @@ class: grass-slide center hide_logo
 #### Option B: Close GRASS, open Rstudio and run:
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[R code]
 
 ```{r grass_init, results='hide', message=FALSE}
 library(rgrass7)
 
-# path to GRASS binaries
+# path to GRASS binaries (run `grass78 --config path`)
 myGRASS <- "/usr/lib64/grass78"
 # path to GRASS database
 myGISDbase <- "/home/veroandreo/grassdata_ogh/"
@@ -898,7 +903,7 @@ library(biomod2)
 #### Read vector data
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[R code]
 ```{r read_vectors, message=FALSE, warning=FALSE, results='hide'}
 # Use sf for vectors
 use_sf()
@@ -914,7 +919,7 @@ mapview(Aa_pres) +
   mapview(background, color="black", col.regions="black", cex=2)
 ```
 ]
-.panel[.panel-name[Output]
+.panel[.panel-name[Map]
 ```{r ref.label='plot', warning=FALSE, echo=FALSE}
 mapview(Aa_pres) + 
   mapview(background, color="black", col.regions="black", cex=2)
@@ -983,25 +988,18 @@ myRespXY <- rbind(st_coordinates(Aa_pres),
 
 # Stack raster layers
 myExpl <- raster::stack(predictors)
+names(myExpl)
 
 # All together
 myBiomodData <- BIOMOD_FormatingData(resp.var = myResp,
                                      expl.var = myExpl,
                                      resp.xy = myRespXY,
                                      resp.name = spp_name)
-```
-
----
-
-#### Run model
-
-```{r model_setting, message=FALSE, warning=FALSE, results='hide'}
-# Set options
+# Set model options
 myBiomodOption <- BIOMOD_ModelingOptions(
   MAXENT.Phillips = 
     list(path_to_maxent.jar = "/home/veroandreo/software/maxent/maxent.jar",
-         lq2lqptthreshold = 100,
-         l2lqthreshold = 100))
+         lq2lqptthreshold = 100, l2lqthreshold = 100))
 ```
 
 ---
@@ -1026,7 +1024,7 @@ myBiomodModelOut <- BIOMOD_Modeling(
 # Inspect the model
 myBiomodModelOut
 ```
-
+<!-- poner paneles -->
 ---
 
 #### Model evaluation
@@ -1044,13 +1042,13 @@ myBiomodModelEval["ROC","Testing.data",,,]
 # Variable importance
 get_variables_importance(myBiomodModelOut)
 ```
-
+<!-- poner paneles -->
 ---
 
 #### Model predictions
 
 .panelset[
-.panel[.panel-name[Code]
+.panel[.panel-name[R code]
 ```{r model_projection, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
 # Set parameters for model projection
 myBiomodProj <- BIOMOD_Projection(
@@ -1069,7 +1067,7 @@ plot(mod_proj[[1]])
 ```
 ]
 
-.panel[.panel-name[Output]
+.panel[.panel-name[Map]
 ```{r plot_model_proj, message=FALSE, warning=FALSE, echo=FALSE, fig.width=6.5, fig.height=3.5}
 # Plot predicted model
 plot(mod_proj[[1]])
@@ -1097,6 +1095,12 @@ for(i in seq_along(1:length(mod_proj@layers))){
 execGRASS("g.list", parameters = list(type = "raster", 
                                       pattern = "maxent*"))
 ```
+<!-- poner paneles -->
+---
+
+<!-- que mas hacer? otros modelos, model averaging, ver las respuestas, ver la incertidumbre,  -->
+<!-- ver donde seria factible predecir y donde no, seleccion de variables, etc. -->
+<!-- paquetes interesantes y links -->
 
 ---
 class: center, middle
@@ -1154,7 +1158,6 @@ class: center hide_logo
 
 `r fa("github")` <a href="https://github.com/veroandreo/">veroandreo</a> 
 `r fa("twitter")` <a href="https://twitter.com/VeronicaAndreo">@VeronicaAndreo</a>
-
 `r fa("globe")` https://veroandreo.gitlab.io/
 
 
