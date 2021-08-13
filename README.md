@@ -1,17 +1,15 @@
-# GRASS GIS presentations at the OpenGeoHub Summer School 2019, M&uuml;nster
-
-
-- [GRASS and R for disease ecology applications - Thursday](https://github.com/veroandreo/grass_opengeohub2019/blob/master/pdf/tgrass_rstats_disease_ecology.pdf)
+# Analyzing space-time satellite data for disease ecology applications with GRASS GIS and R
 
 ## Software
 
+### GRASS GIS
+
 We will use **GRASS GIS 7.8+**. It can be installed either 
-through standalone installers/binaries or through OSGeo-Live (which includes all
-OSGeo software and packages). See this 
+through standalone installers/binaries or through OSGeo-Live (a linux based virtual machine which includes all OSGeo software and packages). See this 
 [**installation guide**](https://gitlab.com/veroandreo/grass-gis-conae/-/blob/master/pdf/00_installation.pdf) 
 for details (Follow only the GRASS GIS part).
 
-### Standalone installers for different OS:
+#### Standalone installers for different OS:
 
 ##### MS Windows
 
@@ -40,12 +38,21 @@ For other Linux distributions including **Fedora** and **openSuSe**, simply inst
 
 Have a look at: http://grassmac.wikidot.com/downloads
 
-### GRASS GIS Add-ons that will be used during the course
+#### GRASS GIS Add-ons that will be used during the course
 
 * [v.in.pygbif](https://grass.osgeo.org/grass7/manuals/addons/v.in.pygbif.html): Searches and imports [GBIF](https://www.gbif.org/) species distribution data. It requires [pygbif](https://pygbif.readthedocs.io/en/stable/) library.
 * [r.bioclim](https://grass.osgeo.org/grass7/manuals/addons/r.bioclim.html): Calculates bioclimatic indices as those in [WorldClim](https://www.worldclim.org/bioclim).
 
 Install with `g.extension extension=name_of_addon`
+
+## R and R-Studio
+
+Well, you know and you'll have it installed for sure :smile: 
+The following packages should be installed beforehand:
+
+```r
+  install.packages(c("rgrass7","raster","sf","mapview","biomod2"))
+```
 
 ## Other software
 
@@ -60,26 +67,32 @@ Please, create a folder in your `$HOME` directory, or under `Documents` if in Wi
 In the end, your `grassdata` folder should look like this:
 
 ```
-  grassdata_ogh/
+  grassdata/
   └── eu_laea
       ├── italy_LST_daily
       └── PERMANENT
 ```
 
-## The trainer
+## Bio
 
-[**Verónica Andreo**](https://veroandreo.gitlab.io/) is a researcher for [CONICET](http://www.conicet.gov.ar/?lan=en)
-working at the Argentinean Space Agency [(CONAE)](http://ig.conae.unc.edu.ar/)
-in Córdoba, Argentina. Her main interests are remote sensing and GIS tools
-for disease ecology research fields and applications. 
-Vero is an [OSGeo](http://www.osgeo.org/) Charter member and a [FOSS4G](http://foss4g.org/) 
-enthusiast and advocate. 
-She is part of the [GRASS GIS Development team](https://grass.osgeo.org/home/credits/) 
-and she also teaches introductory and advanced courses and workshops, especially 
-on GRASS GIS [time series modules](https://grasswiki.osgeo.org/wiki/Temporal_data_processing)
-and their applications.
+[**Verónica Andreo**](https://veroandreo.gitlab.io/) is a biologist. She holds a PhD in
+Biological Sciences and an MSc in Remote Sensing and GIS applications. She works as a 
+researcher for [CONICET](https://www.conicet.gov.ar/) and lecturer at
+[Gulich Institute](http://ig.conae.unc.edu.ar/) - Argentinian Space
+Agency [(CONAE)](https://www.argentina.gob.ar/ciencia/conae) in Córdoba, Argentina.
+Her research is focused on uncovering **environmental drivers of vector-borne disease outbreaks**. 
+She is mostly interested in those environmental features that can be derived 
+**by means of satellite image analysis, remote sensing time series and GIS-based techniques**. 
 
-## References
+Verónica is part of the [GRASS GIS](https://grass.osgeo.org/) Development team and has 
+recently become [the new PSC chair](https://grass.osgeo.org/news/2021_02_05_new_grass_psc/). 
+She is a strong advocate for [OSGeo](https://www.osgeo.org/) and free and open 
+source software for geo-spatial (FOSS4G), currently serving as Program Committee chair 
+for [**FOSS4G 2021**](2021.foss4g.org/). Among other things, she has volunteered as a 
+mentor for GRASS GIS in the [Google Code-In contest](https://codein.withgoogle.com/)
+introducing high school students into the Open Source world.
+
+## GRASS References
 
 - Neteler, M. and Mitasova, H. (2008): *Open Source GIS: A GRASS GIS Approach*. Third edition. ed. Springer, New York. [Book site](https://grassbook.org/)
 - Neteler, M., Bowman, M.H., Landa, M. and Metz, M. (2012): *GRASS GIS: a multi-purpose Open Source GIS*. Environmental Modelling & Software, 31: 124-130 [DOI](http://dx.doi.org/10.1016/j.envsoft.2011.11.014)
@@ -89,7 +102,6 @@ and their applications.
 
 ## License
 
-All the course material:
-
+All the course material is under 
 [![Creative Commons License](assets/img/ccbysa.png)](http://creativecommons.org/licenses/by-sa/4.0/) Creative Commons Attribution-ShareAlike 4.0 International License
 
