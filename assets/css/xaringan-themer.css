@@ -48,7 +48,7 @@
   --background-color: #FCFFFC;
   --link-color: #2BA84A;
   --text-bold-color: #0C9347;
-  --code-highlight-color: rgba(255,255,0,0.8);
+  --code-highlight-color: rgba(43,168,74,0.6);
   --inverse-text-color: #000000;
   --inverse-background-color: #2BA84A;
   --inverse-header-color: #040F0F;
@@ -185,7 +185,6 @@ a, a > code {
 .pull-right-narrow {
   float: right;
   width: 36%;
-  height: 96%;
 }
 .pull-left {
   float: left;
@@ -326,4 +325,8 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 
 .r-blue {
   color: #276dc2;
+}
+
+.large {
+  font-size: 180%;
 }

@@ -1,15 +1,15 @@
 # Analyzing space-time satellite data for disease ecology applications with GRASS GIS and R
 
+In this session we will explore the combined use of GRASS GIS and R following an example of habitat suitability modeling. We will use a daily time series of LST to extract relevant environmental variables for a mosquito species that transmits West Nile virus in Northern Italy. Particularly, we will use TGRASS to estimate bioclimatic variables such as those from Worldclim, autumnal cooling, spring warming, number of consecutive days with a certain LST value, number of potential mosquito generations, etc. We will then import our vector and raster maps into R and proceed with the habitat suitability modeling and prediction.
+
 ## Software
 
 ### GRASS GIS
 
 We will use **GRASS GIS 7.8+**. It can be installed either 
-through standalone installers/binaries or through OSGeo-Live (a linux based virtual machine which includes all OSGeo software and packages). See this 
-[**installation guide**](https://gitlab.com/veroandreo/grass-gis-conae/-/blob/master/pdf/00_installation.pdf) 
-for details (Follow only the GRASS GIS part).
-
-#### Standalone installers for different OS:
+through standalone installers/binaries or through
+[OSGeo-Live](https://live.osgeo.org/en/index.html) 
+(a linux based virtual machine which includes all OSGeo software and packages).
 
 ##### MS Windows
 
@@ -18,7 +18,9 @@ There are two different options:
 2. [OSGeo4W 64-bit](http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe) 
 
 For Windows users, **we strongly recommend installing GRASS GIS through the OSGeo4W package** (second option), 
-since it allows to install all OSGeo software.
+since it allows to install all OSGeo software. See this 
+[**installation guide**](https://gitlab.com/veroandreo/grass-gis-conae/-/blob/master/pdf/00_installation.pdf) 
+for details (Follow only the GRASS GIS part).
 
 ##### Ubuntu Linux
 
@@ -104,4 +106,3 @@ introducing high school students into the Open Source world.
 
 All the course material is under 
 [![Creative Commons License](assets/img/ccbysa.png)](http://creativecommons.org/licenses/by-sa/4.0/) Creative Commons Attribution-ShareAlike 4.0 International License
-

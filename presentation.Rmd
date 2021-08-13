@@ -56,12 +56,10 @@ class: grass-slide, hide_logo, center
 
 OpenGeoHub Summer School - September, 2021]
 
-<!-- background-position: 0% 100%, 100% 0% -->
-<!-- background-size: 30%, 10% -->
 ---
 layout: false
 
-## About the trainer
+## About me
 
 .pull-left-wide[
 - PhD in Biology and MSc in Remote Sensing and GIS
@@ -75,6 +73,13 @@ layout: false
 
 https://veroandreo.gitlab.io/
 ]
+
+---
+class: grass-slide
+
+- GRASS 
+- Temporal GRASS
+- Hands-on
 
 ---
 
@@ -107,13 +112,13 @@ class: grass-slide
 
 ## GRASS general stuff
 
-- Open source, you can use, modify, improve, share
+- Free and open source, you can use, modify, improve, share
 - Strong user community, commercial support
 - Large amount of tools: 500+ core modules, 400+ addons
 - GUI and CLI (easy for scripting) interfaces
 - Python API and libraries
 - Connection with R, QGIS, WPS, etc.
-- Different data types supported: [raster](https://grass.osgeo.org/grass-stable/manuals/rasterintro.html) (including [satellite imagery](https://grass.osgeo.org/grass-stable/manuals/imageryintro.html)), [3D raster or voxel](https://grass.osgeo.org/grass-stable/manuals/raster3dintro.html), [vector](https://grass.osgeo.org/grass-stable/manuals/vectorintro.html) (point, line, boundary, area, face) and [space-time datasets](https://grass.osgeo.org/grass-stable/manuals/temporalintro.html) 
+- Different data types supported: [raster](https://grass.osgeo.org/grass-stable/manuals/rasterintro.html) (including [satellite imagery](https://grass.osgeo.org/grass-stable/manuals/imageryintro.html)), [3D raster or voxel](https://grass.osgeo.org/grass-stable/manuals/raster3dintro.html), [vector](https://grass.osgeo.org/grass-stable/manuals/vectorintro.html) and [space-time datasets](https://grass.osgeo.org/grass-stable/manuals/temporalintro.html) 
 
 ---
 
@@ -181,7 +186,7 @@ GRASS 8
 ]
 
 .right-column[
-<img src="https://grass.osgeo.org/images/news/grassgui8_first_infobar.png" width="900px">
+<img src="https://grass.osgeo.org/images/news/grassgui8_first_infobar.png" width="950px">
 ]
 
 ---
@@ -189,7 +194,7 @@ GRASS 8
 .left-column[
 GRASS 8+
 
-Upcoming...
+Upcoming option to switch between multiple and single window
 ]
 
 .right-column[
@@ -222,7 +227,7 @@ layout: true
 ```python
 #!/usr/bin/env python
 
-# simple example for pyGRASS usage: raster processing via modules approach
+# simple example of pyGRASS usage: raster processing via modules approach
 from grass.pygrass.modules.shortcuts import general as g
 from grass.pygrass.modules.shortcuts import raster as r
 g.message("Filter elevation map by a threshold...")
@@ -238,19 +243,15 @@ r.colors(map=output, color="elevation")
 ``` 
 ---
 
-... or in Jupyter Lab/notebooks via `grass.jupyter`: a new library under development by a GSoC student
+... or use GRASS and Python within Jupyter Lab/notebooks via **grass.jupyter**: a new library under development 
 
-.center[
-<img src="assets/img/grass_jupyter.png" width="40%">]
+.pull-left[.center[
+<img src="assets/img/grass_jupyter.png" width="75%">]]
 
----
+.pull-right[
+# `r emo::ji("star_struck")`
 
-### Try GRASS GIS online: [Binder](https://mybinder.org/) + Jupyter
-
-.center[
-<a href="https://github.com/wenzeslaus/try-grass-in-jupyter"><img src="assets/img/grass_in_binder.png" width="45%"></a>
-
-Just click over **launch** button!
+<br>Curious?? Try yourself [here](https://mybinder.org/v2/gh/OSGeo/grass/599cdff029ea0d5279c33dd83b4d868c4bd86fb4?urlpath=lab%2Ftree%2Fdoc%2Fnotebooks%2Fjupyter_integration.ipynb)
 ]
 
 ---
@@ -319,7 +320,7 @@ class: grass-slide
 class: grass-slide
 
 .pull-right-narrow[
-<img src="assets/img/temporal_modules.png" width="110%">
+<img src="assets/img/temporal_modules.png" width="110%" align="center">
 ]
 
 ## Temporal modules
@@ -355,16 +356,16 @@ class: grass-slide
 .right-column[<img src="assets/img/tgrass_flowchart.png" width="91%">]
 
 ---
-class: grass-slide center
+class: grass-slide center hide_logo
 
-## Hands-on to space-time analysis for disease ecology with GRASS GIS and `r fa("r-project", fill="#276dc2", width = "2em")` 
+## .black[Hands-on to space-time analysis for disease ecology with GRASS GIS and] `r fa("r-project", fill="#276dc2", width = "2em")` 
 
 ---
 class: grass-slide
 
 ### Overview
 
-Habitat suitability mapping for the Asian tiger mosquito in Northern Italy
+> .center[Habitat suitability mapping for the Asian tiger mosquito in Northern Italy based on variables derived from LST data]
 
 .pull-left[
 - **GRASS**
@@ -383,7 +384,18 @@ Habitat suitability mapping for the Asian tiger mosquito in Northern Italy
 
 ---
 
-<!-- a plot about SDM -->
+.pull-left-wide[
+<img src="assets/img/sdm_workflow.png" width="90%">
+]
+
+.pull-right-narrow[
+<br>
+.large[**GRASS**]
+<br><br><br><br><br><br>
+.large[.r-blue[**R**]]
+]
+
+.footnote[Jarnevich et al. 2015. doi:[10.1016/j.ecoinf.2015.06.007](https://doi.org/10.1016/j.ecoinf.2015.06.007)]
 
 ---
 
@@ -397,20 +409,20 @@ Habitat suitability mapping for the Asian tiger mosquito in Northern Italy
 ]
 
 .pull-right[
-<img src="assets/img/aedes_albopictus.jpg" width="45%" align="center">
+<img src="assets/img/aedes_albopictus.jpg" width="47%" align="right">
 <br>
-<img src="assets/img/lst_north_italy_2014.png" width="75%" align="right">
+<img src="assets/img/lst_north_italy_2014.png" width="78%" align="left">
 ]
 
 ---
 
 ### `r fa("download")` Get sample location, mosquito records and code `r fa("download")`
 
-- Create a folder named `grassdata_ogh`
-- Download and unzip [eu_laea location with LST mapset](https://zenodo.org/record/3564515) and unzip within your `grassdata_ogh` folder
+- Create a folder named `grassdata`
+- Download and unzip [eu_laea location with LST mapset](https://zenodo.org/record/3564515) and unzip within your `grassdata` folder
 - Download asian tiger [mosquito occurrences](https://github.com/veroandreo/grass_opengeohub2021/raw/master/data/aedes_albopictus.gpkg) as `.gpkg` file
-- Download [GRASS script]()
-- Download [R script]()
+- Download [GRASS script](https://github.com/veroandreo/grass_opengeohub2021/raw/master/code/grass_R_disease_ecology_code.sh)
+- Download [R script](https://github.com/veroandreo/grass_opengeohub2021/raw/master/code/grass_R_disease_ecology_code.r)
 
 Your folder's tree should look like:
 ```
@@ -419,7 +431,6 @@ Your folder's tree should look like:
       ├── italy_LST_daily
       └── PERMANENT
 ```
-<!-- arreglar los links -->
 
 ---
 
@@ -434,7 +445,7 @@ Your folder's tree should look like:
 .right-column[
 .center[<img src="assets/img/start_grass.png" width="60%">
 
-`r emo::ji("announcement")` This start-up screen is gone in GRASS 8 
+`r emo::ji("announcement")` This start-up screen is gone in GRASS 8 !!
 ]
 ]
 
@@ -615,7 +626,7 @@ t.info input=lst_daily
 ]
 ]
 
-.footnote[See [t.create]() and [t.register]()]
+.footnote[See [t.create](https://grass.osgeo.org/grass-stable/manuals/t.create.html) and [t.register](https://grass.osgeo.org/grass-stable/manuals/t.register.html)]
 
 ---
 
@@ -623,30 +634,36 @@ t.info input=lst_daily
 
 #### Long term monthly avg, min and max LST
 
+.panelset[
+.panel[.panel-name[GRASS code]
 ```bash
 for i in $(seq -w 1 12) ; do 
   t.rast.series input=lst_daily method=average \
     where="strftime('%m', start_time)='${i}'" \
     output=lst_average_${i}
-    
   t.rast.series input=lst_daily method=minimum \
     where="strftime('%m', start_time)='${i}'" \
     output=lst_minimum_${i}
-    
   t.rast.series input=lst_daily method=maximum \
     where="strftime('%m', start_time)='${i}'" \
     output=lst_maximum_${i}  
 done
-
 ```
+]
+
+.panel[.panel-name[Output]
+.center[<img src="assets/img/list_long_term_avg_lst.png" width="70%">]
+]
+]
 
 .footnote[See [t.rast.series](https://grass.osgeo.org/grass-stable/manuals/t.rast.series.html) manual for further details]
 
-<!-- poner paneles con un output -->
 ---
 
 #### Bioclimatic variables
 
+.panelset[
+.panel[.panel-name[GRASS code]
 ```bash
 # Install extension
 g.extension extension=r.bioclim
@@ -661,9 +678,19 @@ r.bioclim \
 # List output maps
 g.list type=raster pattern="worldclim*"
 ```
+]
+
+.panel[.panel-name[Output]
+.center[<img src="assets/img/list_worldclim_lst.png" width="80%">]
+]
+
+.panel[.panel-name[Map]
+.center[<img src="assets/img/bio1.png" width="51%">]
+]
+]
 
 .footnote[See [r.bioclim](https://grass.osgeo.org/grass-stable/manuals/addons/r.bioclim.html) manual for further details]
-<!-- poner paneles con un output -->
+
 ---
 
 #### Spring warming
@@ -714,7 +741,7 @@ t.rast.series input=annual_autumnal_cooling \
 ```
 ]
 .panel[.panel-name[Map]
-.center[<img src="assets/img/autumnal_cooling.png" width="50%">]
+.center[<img src="assets/img/autumnal_cooling.png" width="51%">]
 ]
 ]
 
@@ -766,7 +793,7 @@ t.rast.mapcalc input=annual_mask output=annual_mask_0 \
   expression="if(annual_mask, 0)" \
   basename=annual_mask_0
 
-# Calculate consecutive days with LSTmean <= -2.0
+# Calculate consecutive days with LST <= -2.0
 t.rast.algebra \
   expression="lower_m2_consec_days = annual_mask_0 {+,contains,l} \
   if(lst_daily <= -2.0 && lst_daily[-1] <= -2.0 || \
@@ -781,7 +808,7 @@ t.rast.algebra \
 t.rast.list input=lower_m2_consec_days \
   columns=name,start_time,end_time,min,max
 
-# Median number of consecutive days with LSTmean <= -2
+# Median number of consecutive days with LST <= -2
 t.rast.series input=lower_m2_consec_days \
   output=median_lower_m2_consec_days method=median
 ```
@@ -878,7 +905,7 @@ initGRASS(gisBase = myGRASS, home = tempdir(), gisDbase = myGISDbase,
 ]
 
 .panel[.panel-name[Output]
-```{r ref.label='grass_init', echo=FALSE, size="\tiny"}
+```{r ref.label='grass_init', echo=FALSE, size='tiny'}
 # start GRASS GIS from R
 initGRASS(gisBase = myGRASS, home = tempdir(), gisDbase = myGISDbase, 
           location = myLocation, mapset = myMapset, override = TRUE)
@@ -887,7 +914,6 @@ initGRASS(gisBase = myGRASS, home = tempdir(), gisDbase = myGISDbase,
 ]
 
 ---
-### Within R...
 
 #### Load other packages
 
@@ -904,7 +930,7 @@ library(biomod2)
 
 .panelset[
 .panel[.panel-name[R code]
-```{r read_vectors, message=FALSE, warning=FALSE, results='hide'}
+```{r read_vectors, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
 # Use sf for vectors
 use_sf()
 
@@ -916,7 +942,7 @@ background <- readVECT("background_points")
 ```{r plot, message=FALSE, warning=FALSE, results='hide'}
 # Quick visualization in mapview
 mapview(Aa_pres) + 
-  mapview(background, color="black", col.regions="black", cex=2)
+  mapview(background, col.regions=NA, cex=2)
 ```
 ]
 .panel[.panel-name[Map]
@@ -983,7 +1009,7 @@ myRespXY <- rbind(st_coordinates(Aa_pres),
 
 #### Data preparation and formatting
 
-```{r data_prep2, message=FALSE, warning=FALSE, results='hide'}
+```{r data_prep2, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
 # Explanatory variables
 
 # Stack raster layers
@@ -1024,12 +1050,12 @@ myBiomodModelOut <- BIOMOD_Modeling(
 # Inspect the model
 myBiomodModelOut
 ```
-<!-- poner paneles -->
+
 ---
 
 #### Model evaluation
 
-```{r model_eval, message=FALSE, warning=FALSE, results='hide'}
+```{r model_eval, message=FALSE, warning=FALSE, results='hold'}
 # Extract evaluation data
 myBiomodModelEval <- get_evaluations(myBiomodModelOut)
 
@@ -1038,11 +1064,31 @@ myBiomodModelEval["ACCURACY","Testing.data",,,]
 
 # ROC: Receiver-operator curve
 myBiomodModelEval["ROC","Testing.data",,,]
-
-# Variable importance
-get_variables_importance(myBiomodModelOut)
 ```
-<!-- poner paneles -->
+
+---
+
+#### Variable importance
+
+.panelset[
+.panel[.panel-name[R code]
+```{r vi, message=FALSE, warning=FALSE, results='hide'}
+# Variable importance
+vi <- get_variables_importance(myBiomodModelOut)
+
+# Let's see the first part
+head(vi[1:13,1, ,], n = 10L) %>% 
+  knitr::kable(format = 'html')
+```
+]
+.panel[.panel-name[Output]
+```{r ref.label='vi', warning=FALSE, echo=FALSE}
+head(vi[1:13,1, ,], n = 10L) %>% 
+  knitr::kable(format = 'html')
+```
+]
+]
+
 ---
 
 #### Model predictions
@@ -1079,7 +1125,9 @@ plot(mod_proj[[1]])
 
 #### Optionally, write data back to GRASS GIS
 
-```{r write_raster_grass, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
+.panelset[
+.panel[.panel-name[R code]
+```{r write_raster_grass, message=FALSE, warning=FALSE, results='hide'}
 # Export only one layer
 g <- as(mod_proj[[2]], 'SpatialGridDataFrame')
 writeRAST(g, "maxent_albopictus", flags = "overwrite")
@@ -1095,12 +1143,27 @@ for(i in seq_along(1:length(mod_proj@layers))){
 execGRASS("g.list", parameters = list(type = "raster", 
                                       pattern = "maxent*"))
 ```
-<!-- poner paneles -->
+]
+.panel[.panel-name[Output]
+```{r ref.label='write_raster_grass', message=FALSE, warning=FALSE, echo=FALSE, highlight.output = TRUE}
+# Check it's there
+execGRASS("g.list", parameters = list(type = "raster", 
+                                      pattern = "maxent*"))
+```
+]
+]
+
 ---
 
-<!-- que mas hacer? otros modelos, model averaging, ver las respuestas, ver la incertidumbre,  -->
-<!-- ver donde seria factible predecir y donde no, seleccion de variables, etc. -->
-<!-- paquetes interesantes y links -->
+This is only an example and only the beginning...
+
+- other models to test
+- hyper-parameter tuning
+- variable selection and model selection
+- model averaging or model ensemble
+- model validation
+- uncertainty: where we can predict with confidence
+- many other relevant packages: dismo, sdm, SDMtune, SDMTools, kuenm, caret, CAST, etc.
 
 ---
 class: center, middle
@@ -1109,7 +1172,7 @@ class: center, middle
 
 ---
 
-# `r emo::ji("help")` GRASS GIS HELP!!! `r emo::ji("help")`
+# `r emo::ji("help")` GRASS GIS HELP!!!
 
 - [g.manual](https://grass.osgeo.org/grass76/manuals/g.manual.html):
   in the main GUI under Help or just pressing *F1*
@@ -1141,7 +1204,7 @@ class: center, middle
 
 ---
 
-## `r emo::ji("book")` References 
+## `r emo::ji("book")` GRASS References 
 
 - Neteler, M., Mitasova, H. (2008): *Open Source GIS: A GRASS GIS Approach*. Third edition. ed. Springer, New York. [Book site](https://grassbook.org/)
 - Neteler, M., Bowman, M.H., Landa, M. and Metz, M. (2012): *GRASS GIS: a multi-purpose Open Source GIS*. Environmental Modelling & Software, 31: 124-130 [DOI](http://dx.doi.org/10.1016/j.envsoft.2011.11.014)
