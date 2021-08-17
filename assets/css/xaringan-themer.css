@@ -202,7 +202,7 @@ img, video, iframe {
   max-height: 95%;
 }
 blockquote {
-  border-left: solid 5px #2BA84A80;
+  border-left: solid 10px #2BA84A80;
   padding-left: 1em;
   display: block;
   font-style: italic;
@@ -294,15 +294,6 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 .bg-black {
   background-color: var(--black);
 }
-.message-box-white {
-  width: 100%;
-  border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.700);
-  opacity: 90%;
-  padding: 7px 15px 7px 15px !important;
-  word-wrap: normal;
-  font-size: 0.95em;
-}
 
 /*********************************************
  * BIO
@@ -313,6 +304,7 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
     float: right;
     padding-bottom: 2rem;
 }
+
 /*********************************************
 * Template with grass in the bottom
 **********************************************/
@@ -323,10 +315,27 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
     background-position: bottom;
 }
 
+/*********************************************
+* Other ad-hoc definitions
+**********************************************/
+.message-box-white {
+  width: 100%;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.700);
+  opacity: 90%;
+  padding: 7px 15px 7px 15px !important;
+  word-wrap: normal;
+  font-size: 0.95em;
+}
+
 .r-blue {
   color: #276dc2;
 }
 
 .large {
-  font-size: 180%;
+  font-size: 150%;
+}
+
+.small {
+  font-size: 65%;
 }

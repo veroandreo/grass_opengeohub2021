@@ -23,22 +23,42 @@
 # - extract within `grassdata_ogh` folder
 
 
+# #
+# # Download data from GBIF for Aedes albopictus in Northern Italy
+# #
 #
-# Download data from GBIF for Aedes albopictus in Northern Italy
+#
+# # Set computational region
+# g.region -p raster=lst_2014.001_avg
+#
+# # Install extension (requires pygbif: pip install pygbif)
+# g.extension extension=v.in.pygbif
+#
+# # Import data from GBIF
+# v.in.pygbif output=aedes_albopictus \
+#   taxa="Aedes albopictus" \
+#   date_from="2014-01-01" \
+#   date_to="2018-12-31"
+
+
+#
+# Import data and display it
 #
 
 
-# Set computational region
-g.region -p raster=lst_2014.001_avg
+# Import records
+v.import input=aedes_albopictus.gpkg \
+  output=aedes_albopictus
 
-# Install extension (requires pygbif: pip install pygbif)
-g.extension extension=v.in.pygbif
+# List raster maps
+g.list type=raster
+r.colors map=lst_2014.150_avg color=celsius
 
-# Import data from GBIF
-v.in.pygbif output=aedes_albopictus \
-  taxa="Aedes albopictus" \
-  date_from="2014-01-01" \
-  date_to="2018-12-31"
+# Display records
+d.mon wx0
+d.rast lst_2014.150_avg
+d.vect aedes_albopictus icon=basic/circle \
+  size=7 fill_color=black
 
 
 #
@@ -53,9 +73,9 @@ v.buffer input=aedes_albopictus \
 
 # Create a vector mask to limit background points
 r.mapcalc \
-  expression="rast_mask = if(lst_2014.001_avg, 1, null())"
+  expression="MASK = if(lst_2014.001_avg, 1, null())"
 
-r.to.vect input=rast_mask \
+r.to.vect input=MASK \
   output=vect_mask \
   type=area
 
@@ -63,12 +83,12 @@ r.to.vect input=rast_mask \
 v.overlay ainput=vect_mask \
   binput=aedes_buffer \
   operator=xor \
-  output=mask_background
+  output=mask_bg
 
 # Generate random background points
 v.random output=background_points \
   npoints=1000 \
-  restrict=mask_background \
+  restrict=mask_bg \
   seed=3749
 
 

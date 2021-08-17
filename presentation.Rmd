@@ -43,12 +43,22 @@ xaringanExtra::use_fit_screen()
 xaringanExtra::use_progress_bar(color = "#ee4912", location = "bottom", height = "3px")
 ```
 
+<br><br><br>
+.center[
+#### Slides: 
+
+https://veroandreo.github.io/grass_opengeohub2021/presentation.html
+<br><br>
+#### Repo: 
+
+[`r fa("github", width="3em")`](https://github.com/veroandreo/grass_opengeohub2021)
+]
 ---
 class: grass-slide, hide_logo, center
 
 ## Analyzing space-time satellite data for disease ecology applications with GRASS GIS and R
 
-#### Veronica Andreo
+#### Ver&#243;nica Andreo
 
 .message-box-white[
 <br>
@@ -77,9 +87,13 @@ https://veroandreo.gitlab.io/
 ---
 class: grass-slide
 
-- GRASS 
-- Temporal GRASS
-- Hands-on
+## How is this session organized?
+
+.large[
+- GRASS GIS basic intro
+- Temporal GRASS GIS basic intro
+- Demo session 
+]
 
 ---
 
@@ -104,23 +118,24 @@ A bit of (geek) GRASS GIS history...
 
 <br>
 .message-box-white[
-In case you didn't notice, the video is narrated by William Shatner `r emo::ji("nerd")`
+In case you didn't notice, the video is narrated by William Shatner `r emo::ji("nerd")` `r emo::ji("rocket")`
 ]
 
 ---
 class: grass-slide
 
-## GRASS general stuff
+## GRASS GIS general stuff
 
 - Free and open source, you can use, modify, improve, share
 - Strong user community, commercial support
-- Large amount of tools: 500+ core modules, 400+ addons
-- GUI and CLI (easy for scripting) interfaces
+- Large amount of tools: 500+ [core modules](#modules), 400+ [addons](#addons)
+- GUI and CLI interfaces
 - Python API and libraries
 - Connection with R, QGIS, WPS, etc.
 - Different data types supported: [raster](https://grass.osgeo.org/grass-stable/manuals/rasterintro.html) (including [satellite imagery](https://grass.osgeo.org/grass-stable/manuals/imageryintro.html)), [3D raster or voxel](https://grass.osgeo.org/grass-stable/manuals/raster3dintro.html), [vector](https://grass.osgeo.org/grass-stable/manuals/vectorintro.html) and [space-time datasets](https://grass.osgeo.org/grass-stable/manuals/temporalintro.html) 
 
 ---
+name: modules
 
 ### `r fa("tools")` More than [500 core  modules](https://grass.osgeo.org/grass-stable/manuals/full_index.html) `r fa("tools")`
 
@@ -138,6 +153,7 @@ class: grass-slide
 
 ---
 class: grass-slide
+name: addons
 
 ## `r fa("tools")` More than [300 add-ons](https://grass.osgeo.org/grass-stable/manuals/addons/) `r fa("tools")`
 
@@ -194,7 +210,7 @@ GRASS 8
 .left-column[
 GRASS 8+
 
-Upcoming option to switch between multiple and single window
+Upcoming option to switch between multiple and single window interface
 ]
 
 .right-column[
@@ -222,7 +238,7 @@ layout: true
 
 ---
 
-... or write your Python script and run it from CLI or GUI:
+... write your Python script and run it from CLI or GUI:
 
 ```python
 #!/usr/bin/env python
@@ -243,7 +259,7 @@ r.colors(map=output, color="elevation")
 ``` 
 ---
 
-... or use GRASS and Python within Jupyter Lab/notebooks via **grass.jupyter**: a new library under development 
+... or use GRASS and Python within Jupyter Lab/notebooks via **grass.jupyter**: a new library under development that will come with GRASS 8
 
 .pull-left[.center[
 <img src="assets/img/grass_jupyter.png" width="75%">]]
@@ -291,17 +307,17 @@ We can use [R within a GRASS GIS session](https://grasswiki.osgeo.org/wiki/R_sta
 ---
 class: grass-slide center
 
-# Temporal support in GRASS GIS: TGRASS
+# Temporal support in GRASS GIS: .black[TGRASS]
 
 ---
 
 ## The TGRASS framework
 
-.left[GRASS GIS is **the first FOSS GIS** that incorporated capabilities to **manage, analyze, process and visualize spatio-temporal data**, as well as the temporal relationships among time series.]
+.left[GRASS GIS is the first FOSS GIS that incorporated capabilities to *manage, analyze, process and visualize spatio-temporal data*, as well as the temporal relationships among time series.]
 
 - TGRASS is fully **based on metadata** and does not duplicate any dataset
-- Snapshot approach, i.e., adds time stamps to maps
-- A collection of time stamped maps (snapshots) of the same variable are called space-time datasets or STDS
+- **Snapshot** approach, i.e., adds time stamps to maps
+- A collection of time stamped maps (snapshots) of the same variable are called **space-time datasets** or STDS
 - Maps in a STDS can have different spatial and temporal extents
 
 ---
@@ -314,7 +330,7 @@ class: grass-slide
 - Space time vector datasets (**STVDS**)
 
 <br>
-> `r emo::ji("announcement")` GRASS 8 supports image collections by adding a band reference
+> `r emo::ji("announcement")` Upcoming GRASS 8 will support image collections by adding a band reference
 
 ---
 class: grass-slide
@@ -333,21 +349,30 @@ class: grass-slide
 ]
 
 ---
+layout: true
 
 ### Other TGRASS notions
+
+---
 
 .pull-left[
 - Time can be defined as **intervals** (start and end time) or **instances** (only start time)
 - Time can be **absolute** (e.g., 2017-04-06 22:39:49) or **relative** (e.g., 4 years, 90 days)
-- **Granularity** is the greatest common divisor of the temporal extents (and possible gaps) of all maps in the space-time cube]
+- **Granularity** is the greatest common divisor of the temporal extents (and possible gaps) of all maps in the space-time cube
+]
 
 .pull-right[
-- **Topology** refers to temporal relations between time intervals in a STDS.
-
-<img src="assets/img/temp_relation.png">
+<img src="https://grass.osgeo.org/grass78/manuals/timeline_2D.jpg">
 ]
 
 ---
+
+- **Topology** refers to temporal relations between time intervals in a STDS.
+
+.center[<img src="assets/img/temp_relation.png">]
+
+---
+layout: false
 
 .left-column[
 ### TGRASS:
@@ -358,12 +383,12 @@ class: grass-slide
 ---
 class: grass-slide center hide_logo
 
-## .black[Hands-on to space-time analysis for disease ecology with GRASS GIS and] `r fa("r-project", fill="#276dc2", width = "2em")` 
+## .black[Walk through space-time analysis for disease ecology with GRASS GIS and] `r fa("r-project", fill="#276dc2", width = "2em")` 
 
 ---
 class: grass-slide
 
-### Overview
+### Demo session overview
 
 > .center[Habitat suitability mapping for the Asian tiger mosquito in Northern Italy based on variables derived from LST data]
 
@@ -384,18 +409,11 @@ class: grass-slide
 
 ---
 
-.pull-left-wide[
-<img src="assets/img/sdm_workflow.png" width="90%">
-]
-
-.pull-right-narrow[
-<br>
-.large[**GRASS**]
-<br><br><br><br><br><br>
-.large[.r-blue[**R**]]
-]
-
 .footnote[Jarnevich et al. 2015. doi:[10.1016/j.ecoinf.2015.06.007](https://doi.org/10.1016/j.ecoinf.2015.06.007)]
+
+
+.center[<img src="assets/img/sdm_workflow_edited.png" width="72%">]
+
 
 ---
 
@@ -418,13 +436,13 @@ class: grass-slide
 
 ### `r fa("download")` Get sample location, mosquito records and code `r fa("download")`
 
-- Create a folder named `grassdata`
-- Download and unzip [eu_laea location with LST mapset](https://zenodo.org/record/3564515) and unzip within your `grassdata` folder
-- Download asian tiger [mosquito occurrences](https://github.com/veroandreo/grass_opengeohub2021/raw/master/data/aedes_albopictus.gpkg) as `.gpkg` file
-- Download [GRASS script](https://github.com/veroandreo/grass_opengeohub2021/raw/master/code/grass_R_disease_ecology_code.sh)
-- Download [R script](https://github.com/veroandreo/grass_opengeohub2021/raw/master/code/grass_R_disease_ecology_code.r)
+- Create a folder named `grassdata_ogh`
+- Download and unzip [eu_laea location with LST mapset](https://zenodo.org/record/3564515) and unzip within your `grassdata_ogh` folder
+- Download the asian tiger [mosquito occurrences](https://github.com/veroandreo/grass_opengeohub2021/raw/master/data/aedes_albopictus.gpkg) as `.gpkg` file
+- Download the [GRASS script](https://github.com/veroandreo/grass_opengeohub2021/raw/master/code/grass_R_disease_ecology_code.sh)
+- Download the [R script](https://github.com/veroandreo/grass_opengeohub2021/raw/master/code/grass_R_disease_ecology_code.r)
 
-Your folder's tree should look like:
+The `grassdata_ogh` folder's tree should look like this:
 ```
   grassdata_ogh/
   └── eu_laea
@@ -437,7 +455,7 @@ Your folder's tree should look like:
 .left-column[
 ## Let's start GRASS GIS!
 
-`r emo::ji("surprised")`
+`r emo::ji("hushed")`
 
 ### Fear not!
 ]
@@ -445,13 +463,13 @@ Your folder's tree should look like:
 .right-column[
 .center[<img src="assets/img/start_grass.png" width="60%">
 
-`r emo::ji("announcement")` This start-up screen is gone in GRASS 8 !!
+`r emo::ji("announcement")` This start-up screen will be gone in GRASS 8 !!
 ]
 ]
 
 ---
 
-## Basic notions: <a href="https://grass.osgeo.org/grass76/manuals/grass_database.html">GRASS database</a>
+## What was that? <a href="https://grass.osgeo.org/grass76/manuals/grass_database.html">GRASS database</a>
 
 .pull-left[
 - The **GRASS DATABASE** (or "GISDBASE") is an existing directory containing all GRASS GIS LOCATIONs. 
@@ -462,48 +480,8 @@ Your folder's tree should look like:
 
 .pull-right[
 <img src="assets/img/grass_database.png" width="950px">
-]
 
----
-
-## Basic notions: <a href="https://grass.osgeo.org/grass76/manuals/grass_database.html">GRASS database</a>
-
-- **Why this structure?**
-
- - GRASS GIS has a *native format* for raster and vector data, therefore
-   they must be *imported* or *linked* into a GRASS Location/Mapset.
-
-- **What are the advantages?**
-
- - GRASS DATABASE, LOCATIONs and MAPSETs are folders that *can be easily shared with other users*.
- - The GRASS DATABASE can be *local or remote*, and *special permissions* can be set to specific mapsets in a LOCATION.
- - All data in a LOCATION have necessarily the same CRS.
-
----
-
-## Basic notions: [Computational region](https://grasswiki.osgeo.org/wiki/Computational_region)
-
-![Show computational region](assets/img/region.png)
----
-
-## Basic notions: [Computational region](https://grasswiki.osgeo.org/wiki/Computational_region)
-
-.pull-left[
-The **computational region** is defined by the *bounding box and resolution* (for raster and 3D raster maps).
-
-It can be set and changed by means of [g.region](https://grass.osgeo.org/grass-stable/manuals/g.region.html) to the extent of a vector map, a raster map or manually to some area of interest (subset). 
-
-*Output rasters* will have their extent and resolution equal to the current region.
-]
-
-.pull-right[
-- **Advantages**
-
-  - Keep your results consistent
-  - Avoid clipping maps prior to subarea analysis
-  - Test an algorithm or computationally demanding process in small areas
-  - Fine-tune the settings of a certain module
-  - Run different processes in different areas
+.right[More info at [grass database](#grass-database-slide)]
 ]
 
 ---
@@ -522,13 +500,11 @@ class: grass-slide center
 
 ```bash
 # Import records
-v.import input=aedes_albopictus.gpkg \
-  output=aedes_albopictus
+v.import input=aedes_albopictus.gpkg output=aedes_albopictus
 
 # List raster maps
 g.list type=raster
-r.colors map=lst_2014.150_avg \
-  color=celsius
+r.colors map=lst_2014.150_avg color=celsius
 
 # Display records
 d.mon wx0
@@ -539,31 +515,11 @@ d.vect aedes_albopictus icon=basic/circle \
 ]
 
 .panel[.panel-name[Map]
-.center[<img src="assets/img/wx0_aedes_lst.png" width="600px">]
+.center[<img src="assets/img/wx0_aedes_lst.png" width="570px">]
 ]
 ]
 
----
-class: middle
-
-#### If you'd need to start from scratch:
-
-```bash
-# Set computational region
-g.region -p raster=lst_2014.001_avg
-
-# Install extension 
-# requires pygbif: `pip install pygbif`
-g.extension extension=v.in.pygbif
-
-# Import data from GBIF
-v.in.pygbif output=aedes_albopictus \
-  taxa="Aedes albopictus" \
-  date_from="2014-01-01" \
-  date_to="2018-12-31" 
-```
-
-.footnote[Check [v.in.pygbif](https://grass.osgeo.org/grass-stable/manuals/addons/v.in.pygbif.html) for further options, eg., `mask`]
+.footnote[You can also get the occurrences directly from GBIF into GRASS. See this [extra slide](#gbif-example).]
 
 ---
 
@@ -574,27 +530,29 @@ v.in.pygbif output=aedes_albopictus \
 
 ```bash
 # Create buffer around Aedes albopictus records
-v.buffer input=aedes_albopictus \
-  output=aedes_buffer distance=2000
-  
+v.buffer input=aedes_albopictus output=aedes_buffer distance=2000
+
+# Set computational region
+g.region raster=lst_2014.001_avg
+
 # Create a vector mask to limit background points
-r.mapcalc expression="rast_mask = if(lst_2014.001_avg, 1, null())"
-r.to.vect input=rast_mask output=vect_mask type=area
+r.mapcalc expression="MASK = if(lst_2014.001_avg, 1, null())"
+r.to.vect input=MASK output=vect_mask type=area
 
 # Subtract buffers from vector mask
-v.overlay ainput=vect_mask binput=aedes_buffer \
-  operator=xor output=mask_background
+v.overlay ainput=vect_mask binput=aedes_buffer operator=xor output=mask_bg
 
 # Generate random background points
-v.random output=background_points npoints=1000 \
-  restrict=mask_background seed=3749
+v.random output=background_points npoints=1000 restrict=mask_bg seed=3749
 ```
 ]
 
 .panel[.panel-name[Map]
-.center[<img src="assets/img/points_aedes_background.png" width="700px">]
+.center[<img src="assets/img/points_aedes_background.png" width="600px">]
 ]
 ]
+
+.footnote[See extra slides for details about [*computational region*](#region) and [*masks*](#mask) in GRASS GIS.]
 
 ---
 
@@ -626,7 +584,7 @@ t.info input=lst_daily
 ]
 ]
 
-.footnote[See [t.create](https://grass.osgeo.org/grass-stable/manuals/t.create.html) and [t.register](https://grass.osgeo.org/grass-stable/manuals/t.register.html)]
+.footnote[See [t.create](https://grass.osgeo.org/grass-stable/manuals/t.create.html) & [t.register](https://grass.osgeo.org/grass-stable/manuals/t.register.html)]
 
 ---
 
@@ -685,7 +643,7 @@ g.list type=raster pattern="worldclim*"
 ]
 
 .panel[.panel-name[Map]
-.center[<img src="assets/img/bio1.png" width="51%">]
+.center[<img src="assets/img/bio1.png" width="50%">]
 ]
 ]
 
@@ -823,7 +781,7 @@ class: grass-slide hide_logo center
 
 ## We have all these maps in GRASS, how do we connect with R now?
 
-# `r emo::ji("confused")`
+# `r emo::ji("hushed")`
 
 ---
 
@@ -1009,7 +967,7 @@ myRespXY <- rbind(st_coordinates(Aa_pres),
 
 #### Data preparation and formatting
 
-```{r data_prep2, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
+```{r data_prep2, message=FALSE, warning=FALSE, results='hide'}
 # Explanatory variables
 
 # Stack raster layers
@@ -1109,14 +1067,14 @@ myBiomodProj <- BIOMOD_Projection(
 mod_proj <- get_predictions(myBiomodProj)
 
 # Plot predicted model
-plot(mod_proj[[1]])
+mapview(mod_proj[[2]])
 ```
 ]
 
 .panel[.panel-name[Map]
-```{r plot_model_proj, message=FALSE, warning=FALSE, echo=FALSE, fig.width=6.5, fig.height=3.5}
+```{r plot_model_proj, message=FALSE, warning=FALSE, echo=FALSE}
 # Plot predicted model
-plot(mod_proj[[1]])
+mapview(mod_proj[[2]]) + Aa_pres
 ```
 ]
 ]
@@ -1127,7 +1085,7 @@ plot(mod_proj[[1]])
 
 .panelset[
 .panel[.panel-name[R code]
-```{r write_raster_grass, message=FALSE, warning=FALSE, results='hide'}
+```{r write_raster_grass, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
 # Export only one layer
 g <- as(mod_proj[[2]], 'SpatialGridDataFrame')
 writeRAST(g, "maxent_albopictus", flags = "overwrite")
@@ -1155,15 +1113,18 @@ execGRASS("g.list", parameters = list(type = "raster",
 
 ---
 
-This is only an example and only the beginning...
+### Disclaimer
+
+This is only a toy example and only the beginning...
 
 - other models to test
 - hyper-parameter tuning
 - variable selection and model selection
 - model averaging or model ensemble
-- model validation
+- model validation with independent data
 - uncertainty: where we can predict with confidence
-- many other relevant packages: dismo, sdm, SDMtune, SDMTools, kuenm, caret, CAST, etc.
+- many other relevant packages: 
+  - [dismo](https://cran.r-project.org/web/packages/dismo/index.html), [sdm](https://cran.r-project.org/web/packages/sdm/index.html), [SDMtune](https://cran.r-project.org/web/packages/SDMtune/index.html), [kuenm](https://github.com/marlonecobos/kuenm), [caret](https://cran.r-project.org/web/packages/caret/index.html), [CAST](https://cran.r-project.org/web/packages/CAST/index.html), etc.
 
 ---
 class: center, middle
@@ -1172,7 +1133,7 @@ class: center, middle
 
 ---
 
-# `r emo::ji("help")` GRASS GIS HELP!!!
+# `r emo::ji("sos")` GRASS GIS HELP!!!
 
 - [g.manual](https://grass.osgeo.org/grass76/manuals/g.manual.html):
   in the main GUI under Help or just pressing *F1*
@@ -1223,6 +1184,116 @@ class: center hide_logo
 `r fa("twitter")` <a href="https://twitter.com/VeronicaAndreo">@VeronicaAndreo</a>
 `r fa("globe")` https://veroandreo.gitlab.io/
 
+---
+class: grass-slide middle center
+
+# Extra slides
+
+---
+name: grass-database-slide
+
+## Basic notions: <a href="https://grass.osgeo.org/grass76/manuals/grass_database.html">GRASS database</a>
+
+- **Why this structure?**
+
+ - GRASS GIS has a *native format* for raster and vector data, therefore
+   they must be *imported* or *linked* into a GRASS Location/Mapset.
+
+- **What are the advantages?**
+
+ - GRASS DATABASE, LOCATIONs and MAPSETs are folders that *can be easily shared with other users*.
+ - The GRASS DATABASE can be *local or remote*, and *special permissions* can be set to specific mapsets in a LOCATION.
+ - All data in a LOCATION have necessarily the same CRS.
+
+---
+name: gbif-example
+
+#### GBIF data can be queried and downloaded directly from GRASS
+
+```bash
+# Set computational region
+g.region -p raster=lst_2014.001_avg
+
+# Install extension 
+# requires pygbif: `pip install pygbif`
+g.extension extension=v.in.pygbif
+
+# Import data from GBIF
+v.in.pygbif output=aedes_albopictus \
+  taxa="Aedes albopictus" \
+  date_from="2014-01-01" \
+  date_to="2018-12-31" 
+```
+
+.footnote[Check [v.in.pygbif](https://grass.osgeo.org/grass-stable/manuals/addons/v.in.pygbif.html) for further options, eg., `mask`]
+
+---
+name: region
+
+## [Computational region](https://grasswiki.osgeo.org/wiki/Computational_region)
+
+![Show computational region](assets/img/region.png)
+
+---
+
+## [Computational region](https://grasswiki.osgeo.org/wiki/Computational_region)
+
+.pull-left[
+The **computational region** is defined by the *bounding box and resolution* (for raster and 3D raster maps).
+
+It can be set and changed by means of [g.region](https://grass.osgeo.org/grass-stable/manuals/g.region.html) to the extent of a vector map, a raster map or manually to some area of interest (subset). 
+
+*Output rasters* will have their extent and resolution equal to the current region.
+]
+
+.pull-right[
+- **Advantages**
+
+  - Keep your results consistent
+  - Avoid clipping maps prior to subarea analysis
+  - Test an algorithm or computationally demanding process in small areas
+  - Fine-tune the settings of a certain module
+  - Run different processes in different areas
+]
+
+---
+name:mask
+
+## MASK
+
+- Masks are set with [r.mask](https://grass.osgeo.org/grass76/manuals/r.mask.html) or creating a raster map called `MASK`. 
+- Masks are virtual masks, they are only actually applied when reading raster maps
+- All cells that are *NULL* in the MASK map will be ignored (also all areas outside the computational region).
+- Vector maps can be also used as masks
+
+
+.center[
+<img src="assets/img/masks.png" width="62%" >
+
+.small[a- Elevation raster and lakes vector maps. b- Only the raster data inside the masked area are used for further analysis. c- Inverse mask.]
+]
+---
+
+### MASK examples
+
+```bash
+# use vector as mask
+r.mask vector=lakes
+
+# use vector as mask, set inverse mask
+r.mask -i vector=lakes
+
+# mask categories of a raster map
+r.mask raster=landclass96 maskcats="5 thru 7"
+
+# create a raster named MASK
+r.mapcalc expression="MASK = if(elevation < 100, 1, null())"
+
+# remove mask
+r.mask -r
+```
+
+.footnote[Masks are only actually applied when reading a GRASS raster map, i.e., when used as input.]
 
 ---
 class: center bottom
@@ -1232,3 +1303,4 @@ Slides created via the R packages:
 [xaringan](https://github.com/yihui/xaringan)<br>
 [xaringanExtra]()<br>
 [gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+
