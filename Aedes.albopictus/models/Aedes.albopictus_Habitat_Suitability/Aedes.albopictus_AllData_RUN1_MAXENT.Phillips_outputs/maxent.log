@@ -1,21 +1,21 @@
-Mon Aug 16 18:08:41 CEST 2021
+Wed Aug 18 18:28:25 CEST 2021
 MaxEnt version 3.4.1
 Reading file Back_swd.csv
 readGrid: max memory 536870912, total allocated 264241152, free 253026304, used 11214848, increment 11214848
 Reading samples from Sp_swd.csv
-Read samples: max memory 536870912, total allocated 264241152, free 242035136, used 22206016, increment 10991168
+Read samples: max memory 536870912, total allocated 264241152, free 242035160, used 22205992, increment 10991144
 Making features
-makeFeatures: max memory 536870912, total allocated 264241152, free 239423912, used 24817240, increment 2611224
-Command line used:  environmentallayers=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Back_swd.csv samplesfile=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Sp_swd.csv projectionlayers=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Predictions/Pred_swd.csv outputdirectory=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/Aedes.albopictus_AllData_RUN1_MAXENT.Phillips_outputs outputformat=logistic redoifexists visible=FALSE linear=TRUE quadratic=TRUE product=TRUE threshold=TRUE hinge=TRUE lq2lqptthreshold=100 l2lqthreshold=100 hingethreshold=15 beta_threshold=-1 beta_categorical=-1 beta_lqp=-1 beta_hinge=-1 betamultiplier=1 defaultprevalence=0.5 autorun nowarnings notooltips noaddsamplestobackground
-Command line to repeat: java density.MaxEnt nowarnings noprefixes outputformat=logistic outputdirectory=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/Aedes.albopictus_AllData_RUN1_MAXENT.Phillips_outputs projectionlayers=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Predictions/Pred_swd.csv samplesfile=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Sp_swd.csv environmentallayers=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Back_swd.csv nowarnings notooltips noaskoverwrite threshold noaddsamplestobackground autorun novisible lq2lqptthreshold=100 l2lqthreshold=100
+makeFeatures: max memory 536870912, total allocated 264241152, free 239423912, used 24817240, increment 2611248
+Command line used:  environmentallayers=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Back_swd.csv samplesfile=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Sp_swd.csv projectionlayers=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Predictions/Pred_swd.csv outputdirectory=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/Aedes.albopictus_AllData_RUN1_MAXENT.Phillips_outputs outputformat=logistic redoifexists visible=FALSE linear=TRUE quadratic=TRUE product=TRUE threshold=TRUE hinge=TRUE lq2lqptthreshold=100 l2lqthreshold=100 hingethreshold=15 beta_threshold=-1 beta_categorical=-1 beta_lqp=-1 beta_hinge=-1 betamultiplier=1 defaultprevalence=0.5 autorun nowarnings notooltips noaddsamplestobackground
+Command line to repeat: java density.MaxEnt nowarnings noprefixes outputformat=logistic outputdirectory=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/Aedes.albopictus_AllData_RUN1_MAXENT.Phillips_outputs projectionlayers=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Predictions/Pred_swd.csv samplesfile=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Sp_swd.csv environmentallayers=Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Back_swd.csv nowarnings notooltips noaskoverwrite threshold noaddsamplestobackground autorun novisible lq2lqptthreshold=100 l2lqthreshold=100
 Species: Aedes.albopictus_AllData_RUN1
 Layers: avg_autumnal_cooling avg_count_tmean_higher20_lower30 avg_spring_warming median_lower0_consec_days worldclim_bio01 worldclim_bio02 worldclim_bio03 worldclim_bio04 worldclim_bio05 worldclim_bio06 worldclim_bio07 worldclim_bio10 worldclim_bio11
 Layertypes: Continuous Continuous Continuous Continuous Continuous Continuous Continuous Continuous Continuous Continuous Continuous Continuous Continuous
 outputformat: logistic
 outputdirectory: Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/Aedes.albopictus_AllData_RUN1_MAXENT.Phillips_outputs
-projectionlayers: Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Predictions/Pred_swd.csv
-samplesfile: Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Sp_swd.csv
-environmentallayers: Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_41597545/Back_swd.csv
+projectionlayers: Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Predictions/Pred_swd.csv
+samplesfile: Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Sp_swd.csv
+environmentallayers: Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/m_24824116/Back_swd.csv
 warnings: false
 tooltips: false
 askoverwrite: false
@@ -28,21 +28,21 @@ l2lqthreshold: 100
 
 getSamples: max memory 536870912, total allocated 264241152, free 239423912, used 24817240, increment 0
 Aedes.albopictus_AllData_RUN1: 
-Regularization values: linear/quadratic/product: 0.138, categorical: 0.250, threshold: 1.410, hinge: 0.500
-59 samples
-Density: max memory 536870912, total allocated 264241152, free 258956848, used 5284304, increment -19532936
-linearPredictor: max memory 536870912, total allocated 264241152, free 258956848, used 5284304, increment 0
-FeaturedSpace: max memory 536870912, total allocated 264241152, free 258956848, used 5284304, increment 0
-Sequential: max memory 536870912, total allocated 264241152, free 258956848, used 5284304, increment 0
+Regularization values: linear/quadratic/product: 0.136, categorical: 0.250, threshold: 1.400, hinge: 0.500
+60 samples
+Density: max memory 536870912, total allocated 264241152, free 258969208, used 5271944, increment -19545296
+linearPredictor: max memory 536870912, total allocated 264241152, free 258969208, used 5271944, increment 0
+FeaturedSpace: max memory 536870912, total allocated 264241152, free 258969208, used 5271944, increment 0
+Sequential: max memory 536870912, total allocated 264241152, free 258969208, used 5271944, increment 0
 Initial loss: 6.684611727667927
-500: time = 0.690000 loss = -429.063356
-Resulting gain: 435.74796732379986
-Time since start: 2.618
+500: time = 0.755000 loss = 5.589136
+Resulting gain: 1.0954761340234587
+Time since start: 2.83
 Projecting...
 Writing file Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/Aedes.albopictus_AllData_RUN1_MAXENT.Phillips_outputs/Aedes.albopictus_AllData_RUN1.csv
 Projecting...
 Reading file Pred_swd.csv
-readGrid: max memory 536870912, total allocated 264241152, free 215612400, used 48628752, increment 43344448
+readGrid: max memory 536870912, total allocated 264241152, free 211947392, used 52293760, increment 47021816
 Writing file Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/Aedes.albopictus_AllData_RUN1_MAXENT.Phillips_outputs/Aedes.albopictus_AllData_RUN1_Pred_swd.csv
 Writing file Aedes.albopictus/models/Aedes.albopictus_Habitat_Suitability/Aedes.albopictus_AllData_RUN1_MAXENT.Phillips_outputs/Aedes.albopictus_AllData_RUN1_Pred_swd_clamping.csv
 Ending

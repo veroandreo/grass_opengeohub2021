@@ -888,7 +888,7 @@ library(biomod2)
 
 .panelset[
 .panel[.panel-name[R code]
-```{r read_vectors, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
+```{r read_vectors, message=FALSE, warning=FALSE, results='hide'}
 # Use sf for vectors
 use_sf()
 
@@ -903,6 +903,7 @@ mapview(Aa_pres) +
   mapview(background, col.regions=NA, cex=2)
 ```
 ]
+
 .panel[.panel-name[Map]
 ```{r ref.label='plot', warning=FALSE, echo=FALSE}
 mapview(Aa_pres) + 
@@ -918,7 +919,7 @@ layout: true
 
 ---
 
-```{r read_rasters, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
+```{r read_rasters, message=FALSE, warning=FALSE, results='hide'}
 # Use sp for rasters
 use_sp()
 
@@ -961,42 +962,86 @@ myResp <- c(pres, backg)
 
 myRespXY <- rbind(st_coordinates(Aa_pres),
 		          st_coordinates(background))
+
+# Explanatory variables
+myExpl <- raster::stack(predictors)
+names(myExpl)
 ```
 
 ---
 
 #### Data preparation and formatting
 
-```{r data_prep2, message=FALSE, warning=FALSE, results='hide'}
-# Explanatory variables
-
-# Stack raster layers
-myExpl <- raster::stack(predictors)
-names(myExpl)
-
-# All together
+.panelset[
+.panel[.panel-name[R code]
+```{r data_prep2, message=FALSE, warning=FALSE, results='hide', fig.show='hide'}
+# Format data as required by biomod
 myBiomodData <- BIOMOD_FormatingData(resp.var = myResp,
                                      expl.var = myExpl,
                                      resp.xy = myRespXY,
                                      resp.name = spp_name)
+
+# Inspect data
+myBiomodData
+
+# Plot data
+plot(myBiomodData)
+```
+]
+
+.panel[.panel-name[Output]
+```{r print_data_object, warning=FALSE, echo=FALSE}
+# Inspect data
+myBiomodData
+```
+]
+
+.panel[.panel-name[Plot]
+```{r plot_data_object, warning=FALSE, echo=FALSE, out.width='72%'}
+par(mar=c(2,2,2,2))
+plot(myBiomodData)
+```
+]
+]
+
+---
+
+#### Set model(s) options
+
+.panelset[
+.panel[.panel-name[R code]
+```{r model_options, message=FALSE, warning=FALSE, results='hide'}
 # Set model options
 myBiomodOption <- BIOMOD_ModelingOptions(
   MAXENT.Phillips = 
     list(path_to_maxent.jar = "/home/veroandreo/software/maxent/maxent.jar",
-         lq2lqptthreshold = 100, l2lqthreshold = 100))
+         maximumiterations = 200,
+         lq2lqptthreshold = 100, 
+         l2lqthreshold = 100))
+
+# Inspect all configs for MaxEnt
+myBiomodOption@MAXENT.Phillips
 ```
+]
+
+.panel[.panel-name[Output]
+```{r print_model_options, message=FALSE, warning=FALSE, echo=FALSE}
+myBiomodOption@MAXENT.Phillips
+```
+]
+]
 
 ---
 
 #### Run model
 
-```{r model_run, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
+```{r model_run, message=FALSE, warning=FALSE, results='hide'}
 # Run model
 myBiomodModelOut <- BIOMOD_Modeling(
   myBiomodData,
   models = c('MAXENT.Phillips'),  
   models.options = myBiomodOption,
-  NbRunEval=3,     
+  NbRunEval=5,     
   DataSplit=80,
   VarImport=10,
   models.eval.meth = c('ROC','ACCURACY'),
@@ -1013,6 +1058,8 @@ myBiomodModelOut
 
 #### Model evaluation
 
+.panelset[
+.panel[.panel-name[R code]
 ```{r model_eval, message=FALSE, warning=FALSE, results='hold'}
 # Extract evaluation data
 myBiomodModelEval <- get_evaluations(myBiomodModelOut)
@@ -1022,7 +1069,20 @@ myBiomodModelEval["ACCURACY","Testing.data",,,]
 
 # ROC: Receiver-operator curve
 myBiomodModelEval["ROC","Testing.data",,,]
+
+# Save run with max ROC
+max_roc <- which.max(myBiomodModelEval["ROC","Testing.data",,,])
 ```
+]
+
+.panel[.panel-name[Plot]
+```{r plot_model_eval, message=FALSE, warning=FALSE, echo=FALSE, out.width='60%'}
+models_scores_graph(myBiomodModelOut, 
+                    by = "cv_run", 
+                    metrics = c("ROC", "ACCURACY"))
+```
+]
+]
 
 ---
 
@@ -1037,12 +1097,57 @@ vi <- get_variables_importance(myBiomodModelOut)
 # Let's see the first part
 head(vi[1:13,1, ,], n = 10L) %>% 
   knitr::kable(format = 'html')
+
+# ... and estimate the mean
+head(apply(vi, c(1,2), mean)) %>% 
+  knitr::kable(format = 'html')
 ```
 ]
-.panel[.panel-name[Output]
-```{r ref.label='vi', warning=FALSE, echo=FALSE}
+
+.panel[.panel-name[Output 1]
+```{r warning=FALSE, echo=FALSE}
 head(vi[1:13,1, ,], n = 10L) %>% 
   knitr::kable(format = 'html')
+```
+]
+
+.panel[.panel-name[Output 2]
+```{r warning=FALSE, echo=FALSE}
+head(apply(vi, c(1,2), mean), n = 10L) %>% 
+  knitr::kable(format = 'html')
+```
+]
+]
+
+---
+
+#### Response curves
+
+.panelset[
+.panel[.panel-name[R code]
+```{r response_curves, warning=FALSE, fig.show='hide'}
+# Extract model of interest
+Aa_maxent <- BIOMOD_LoadModels(myBiomodModelOut, models = "MAXENT.Phillips")
+
+# Plot response curves
+resp_curves <- biomod2::response.plot2(models = Aa_maxent, 
+                               Data = get_formal_data(myBiomodModelOut, 
+                                                      "expl.var"),
+                               show.variables = get_formal_data(myBiomodModelOut,
+                                                                "expl.var.names"),
+                               do.bivariate = FALSE, 
+                               fixed.var.metric = "median")
+```
+]
+
+.panel[.panel-name[Plot]
+```{r ref.label='response_curves', warning=FALSE, echo=FALSE, out.width='60%'}
+resp_curves <- biomod2::response.plot2(models = Aa_maxent, 
+                               Data = get_formal_data(myBiomodModelOut, "expl.var"),
+                               show.variables = get_formal_data(myBiomodModelOut,
+                                                                "expl.var.names"),
+                               do.bivariate = FALSE, 
+                               fixed.var.metric = "median")
 ```
 ]
 ]
@@ -1053,7 +1158,7 @@ head(vi[1:13,1, ,], n = 10L) %>%
 
 .panelset[
 .panel[.panel-name[R code]
-```{r model_projection, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
+```{r model_projection, message=FALSE, warning=FALSE, results='hide'}
 # Set parameters for model projection
 myBiomodProj <- BIOMOD_Projection(
                 modeling.output = myBiomodModelOut, 
@@ -1066,15 +1171,15 @@ myBiomodProj <- BIOMOD_Projection(
 # Obtain predictions
 mod_proj <- get_predictions(myBiomodProj)
 
-# Plot predicted model
-mapview(mod_proj[[2]])
+# Plot predicted model with highest ROC
+mapview(mod_proj[[max_roc]])
 ```
 ]
 
 .panel[.panel-name[Map]
 ```{r plot_model_proj, message=FALSE, warning=FALSE, echo=FALSE}
 # Plot predicted model
-mapview(mod_proj[[2]]) + Aa_pres
+mapview(mod_proj[[max_roc]]) + Aa_pres
 ```
 ]
 ]
@@ -1085,7 +1190,7 @@ mapview(mod_proj[[2]]) + Aa_pres
 
 .panelset[
 .panel[.panel-name[R code]
-```{r write_raster_grass, message=FALSE, warning=FALSE, results='hide', eval=FALSE}
+```{r write_raster_grass, message=FALSE, warning=FALSE, results='hide'}
 # Export only one layer
 g <- as(mod_proj[[2]], 'SpatialGridDataFrame')
 writeRAST(g, "maxent_albopictus", flags = "overwrite")
@@ -1102,6 +1207,7 @@ execGRASS("g.list", parameters = list(type = "raster",
                                       pattern = "maxent*"))
 ```
 ]
+
 .panel[.panel-name[Output]
 ```{r ref.label='write_raster_grass', message=FALSE, warning=FALSE, echo=FALSE, highlight.output = TRUE}
 # Check it's there
@@ -1120,7 +1226,7 @@ This is only a toy example and only the beginning...
 - other models to test
 - hyper-parameter tuning
 - variable selection and model selection
-- model averaging or model ensemble
+- ensemble modeling
 - model validation with independent data
 - uncertainty: where we can predict with confidence
 - many other relevant packages: 
@@ -1272,6 +1378,7 @@ name:mask
 
 .small[a- Elevation raster and lakes vector maps. b- Only the raster data inside the masked area are used for further analysis. c- Inverse mask.]
 ]
+
 ---
 
 ### MASK examples
