@@ -1,14 +1,14 @@
 Predictor variable,Categorical,Sample average
-avg_autumnal_cooling,false,-0.16346383554240068
-avg_count_tmean_higher20_lower30,false,105.91666704813639
-avg_spring_warming,false,0.1703144323080778
-median_lower0_consec_days,false,4.283333333333333
-worldclim_bio01,false,142.98333333333332
-worldclim_bio02,false,126.78333333333333
-worldclim_bio03,false,35.06666666666667
-worldclim_bio04,false,7925.483333333334
-worldclim_bio05,false,315.73333333333335
-worldclim_bio06,false,-47.56666666666667
-worldclim_bio07,false,363.3
-worldclim_bio10,false,234.26666666666668
-worldclim_bio11,false,59.333333333333336
+avg_autumnal_cooling,false,-0.16199489769836267
+avg_count_tmean_higher20_lower30,false,105.2133337656657
+avg_spring_warming,false,0.16596411988139154
+median_lower0_consec_days,false,1.75
+worldclim_bio01,false,145.05
+worldclim_bio02,false,126.35
+worldclim_bio03,false,35.36666666666667
+worldclim_bio04,false,7780.633333333333
+worldclim_bio05,false,316.68333333333334
+worldclim_bio06,false,-42.516666666666666
+worldclim_bio07,false,359.2
+worldclim_bio10,false,235.38333333333333
+worldclim_bio11,false,62.71666666666667

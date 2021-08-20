@@ -1280,14 +1280,24 @@ class: center, middle
 - Gebbert, S., Leppelt, T. and Pebesma, E. (2019). *A Topology Based Spatio-Temporal Map Algebra for Big Data Analysis*. Data, 4, 86. [DOI](https://doi.org/10.3390/data4020086)
 
 ---
+class: center middle hide_logo
+
+<br>
+.large[See you at the international [FOSS4G](https://2021.foss4g.org/) by the end of the month!
+
+Have a look at the amazing list of [workshops](https://2021.foss4g.org/schedule/workhops.html) and [talks](https://2021.foss4g.org/schedule/full-schedule.html) offered and [register](https://registration.2021.foss4g.org/OSGeo/FOSS4G/)!
+]
+
+<img src="https://registration.2021.foss4g.org/media/pub/thumbs/fccad5b3f7e82c69e51a33ac42bdd536.5000x120.png" width="40%">
+
+---
 class: center hide_logo
 
 # Thanks!!
 
-<img src="assets/img/vero_round_small.png" width="20%">
+<img src="assets/img/vero_round_small.png" width="18%">
 
-`r fa("github")` <a href="https://github.com/veroandreo/">veroandreo</a> 
-`r fa("twitter")` <a href="https://twitter.com/VeronicaAndreo">@VeronicaAndreo</a>
+`r fa("github")` <a href="https://github.com/veroandreo/">veroandreo</a> `r fa("twitter")` <a href="https://twitter.com/VeronicaAndreo">@VeronicaAndreo</a>
 `r fa("globe")` https://veroandreo.gitlab.io/
 
 ---

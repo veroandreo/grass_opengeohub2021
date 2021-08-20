@@ -44,6 +44,10 @@ use_sf()
 Aa_pres <- readVECT("aedes_albopictus")
 background <- readVECT("background_points")
 
+# Quick visualization in mapview
+mapview(Aa_pres) +
+  mapview(background, col.regions=NA, cex=2)
+
 
 #
 # Read raster data
@@ -82,7 +86,7 @@ for (i in to_import){
 }
 
 # Quick visualization in mapview
-mapview(predictors[[3]]) + Aa_pres
+mapview(predictors[['worldclim_bio01']]) + Aa_pres
 
 
 #
@@ -108,13 +112,19 @@ myRespXY <- rbind(st_coordinates(Aa_pres),
 
 # Stack raster layers
 myExpl <- raster::stack(predictors)
+names(myExpl)
 
-
-# All together
+# # Format data as required by biomod
 myBiomodData <- BIOMOD_FormatingData(resp.var = myResp,
                                      expl.var = myExpl,
                                      resp.xy = myRespXY,
                                      resp.name = myRespName)
+
+# Inspect data
+myBiomodData
+
+# Plot data
+plot(myBiomodData)
 
 
 #
@@ -128,7 +138,11 @@ myBiomodOption <- BIOMOD_ModelingOptions(
   MAXENT.Phillips =
     list(path_to_maxent.jar = "/home/veroandreo/software/maxent/maxent.jar",
          lq2lqptthreshold = 100,
+         l2lqthreshold = 100,
          l2lqthreshold = 100))
+
+# Inspect all configs for MaxEnt
+myBiomodOption@MAXENT.Phillips
 
 # Run model
 myBiomodModelOut <- BIOMOD_Modeling(
@@ -162,8 +176,35 @@ myBiomodModelEval["ACCURACY","Testing.data",,,]
 # ROC: Receiver-operator curve
 myBiomodModelEval["ROC","Testing.data",,,]
 
+# Save run with max ROC
+max_roc <- which.max(myBiomodModelEval["ROC","Testing.data",,,])
+
+# Plot model evaluation metrics
+models_scores_graph(myBiomodModelOut,
+                    by = "cv_run",
+                    metrics = c("ROC", "ACCURACY"))
+
 # Variable importance
-get_variables_importance(myBiomodModelOut)
+vi <- get_variables_importance(myBiomodModelOut)
+
+# Let's see the first part
+head(vi[1:13,1, ,], n = 10L)
+
+# ... and estimate the mean
+head(apply(vi, c(1,2), mean))
+
+# Response curves
+# Extract model of interest
+Aa_maxent <- BIOMOD_LoadModels(myBiomodModelOut, models = "MAXENT.Phillips")
+
+# Plot response curves
+resp_curves <- biomod2::response.plot2(models = Aa_maxent,
+                                       Data = get_formal_data(myBiomodModelOut,
+                                                              "expl.var"),
+                                       show.variables = get_formal_data(myBiomodModelOut,
+                                                                        "expl.var.names"),
+                                       do.bivariate = FALSE,
+                                       fixed.var.metric = "median")
 
 
 #
@@ -182,11 +223,9 @@ myBiomodProj <- BIOMOD_Projection(
 
 # Obtain predictions
 mod_proj <- get_predictions(myBiomodProj)
-mod_proj
 
-# Plot predicted model - all runs and only one
-plot(mod_proj)
-plot(mod_proj[[2]], main = "Predicted potential distribution")
+# Plot predicted model with highest ROC
+mapview(mod_proj[[max_roc]])
 
 
 #
@@ -204,3 +243,6 @@ for(i in seq_along(1:length(mod_proj@layers))){
             paste0("maxent_albopictus_", i, sep=""))
 }
 
+# Check it's there
+execGRASS("g.list", parameters = list(type = "raster",
+                                      pattern = "maxent*"))
