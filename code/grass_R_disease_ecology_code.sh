@@ -16,11 +16,13 @@
 # Requirements:
 #
 # - GRASS 7.8+
-# - Addons: v.in.pygbif, r.bioclim, r.seasons
-# - bash basic notions, i.e., use UNIX-like systems preferably
 # - create a `grassdata_ogh` folder
-# - download `eu_laea` location from: https://zenodo.org/record/3564515
+# - download `eu_laea` location from:
+#   https://drive.google.com/file/d/1z1b2NLC4Z6yzz_57RddTdRRK_gUkd7fU/view?usp=sharing
 # - extract within `grassdata_ogh` folder
+
+# Requirements for suggested extra variables:
+# - Addons needed: v.in.pygbif, r.bioclim, r.seasons
 
 
 # #
@@ -70,6 +72,9 @@ d.vect aedes_albopictus icon=basic/circle \
 v.buffer input=aedes_albopictus \
   output=aedes_buffer \
   distance=1000
+
+# Set computational region
+g.region -p raster=lst_2014.001_avg
 
 # Create a vector mask to limit background points
 r.mapcalc \

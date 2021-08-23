@@ -40,12 +40,17 @@ For other Linux distributions including **Fedora** and **openSuSe**, simply inst
 
 Have a look at: http://grassmac.wikidot.com/downloads
 
-#### GRASS GIS Add-ons that will be used during the course
+#### GRASS GIS Add-on that will be used during the demo
 
-* [v.in.pygbif](https://grass.osgeo.org/grass7/manuals/addons/v.in.pygbif.html): Searches and imports [GBIF](https://www.gbif.org/) species distribution data. It requires [pygbif](https://pygbif.readthedocs.io/en/stable/) library.
 * [r.bioclim](https://grass.osgeo.org/grass7/manuals/addons/r.bioclim.html): Calculates bioclimatic indices as those in [WorldClim](https://www.worldclim.org/bioclim).
 
 Install with `g.extension extension=name_of_addon`
+
+**Attention UNIX-like users:** `g.extension` is currently failing in GRASS. See
+alternative solutions 
+[here](https://grass.osgeo.org/news/2021_08_01_g_extension_currently_not_working/) or 
+[download](https://github.com/OSGeo/grass-addons/archive/refs/heads/grass7.zip) the addons
+repo and use: `g.extension extension=name_of_addon url=path/to/addon/folder`.
 
 ## R and R-Studio
 
@@ -62,9 +67,9 @@ We will use the software **MaxEnt** to model habitat suitability. The software c
 
 ## Data
 
-Please, create a folder in your `$HOME` directory, or under `Documents` if in Windows, and name it **grassdata**. Then, download the following ready to use *location* and unzip them within `grassdata`:
+Please, create a folder in your `$HOME` directory, or under `Documents` if in Windows, and name it **grassdata_ogh**. Then, download the following ready to use *location* and unzip  within `grassdata_ogh`:
 
-* [Northern Italy (1 Gb)](https://zenodo.org/record/3564515)
+* [Northern Italy (1.7 Gb)](https://drive.google.com/file/d/1z1b2NLC4Z6yzz_57RddTdRRK_gUkd7fU/view?usp=sharing)
 
 In the end, your `grassdata` folder should look like this:
 
@@ -74,6 +79,7 @@ In the end, your `grassdata` folder should look like this:
       ├── italy_LST_daily
       └── PERMANENT
 ```
+
 
 ## Bio
 
