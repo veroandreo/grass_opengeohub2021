@@ -437,7 +437,7 @@ class: grass-slide
 ### `r fa("download")` Get sample location, mosquito records and code `r fa("download")`
 
 - Create a folder named `grassdata_ogh`
-- Download and unzip [eu_laea location with LST mapset](https://zenodo.org/record/3564515) and unzip within your `grassdata_ogh` folder
+- Download and unzip [eu_laea location with LST mapset](https://drive.google.com/file/d/1z1b2NLC4Z6yzz_57RddTdRRK_gUkd7fU/view?usp=sharing) and unzip within your `grassdata_ogh` folder
 - Download the asian tiger [mosquito occurrences](https://github.com/veroandreo/grass_opengeohub2021/raw/master/data/aedes_albopictus.gpkg) as `.gpkg` file
 - Download the [GRASS script](https://github.com/veroandreo/grass_opengeohub2021/raw/master/code/grass_R_disease_ecology_code.sh)
 - Download the [R script](https://github.com/veroandreo/grass_opengeohub2021/raw/master/code/grass_R_disease_ecology_code.r)
@@ -533,7 +533,7 @@ d.vect aedes_albopictus icon=basic/circle \
 v.buffer input=aedes_albopictus output=aedes_buffer distance=2000
 
 # Set computational region
-g.region raster=lst_2014.001_avg
+g.region -p raster=lst_2014.001_avg
 
 # Create a vector mask to limit background points
 r.mapcalc expression="MASK = if(lst_2014.001_avg, 1, null())"
