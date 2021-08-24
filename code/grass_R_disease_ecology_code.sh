@@ -270,8 +270,6 @@ t.rast.series input=lower_m2_consec_days \
 ##
 ## EXTRA: Further variables that could be obtained
 ##
-## DO NOT RUN DURING THE SESSION
-##
 ##############################################################
 
 

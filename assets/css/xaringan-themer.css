@@ -117,7 +117,9 @@ h1, h2, h3 {
 }
 .remark-inline-code {
   font-size: var(--code-inline-font-size);
-  color: #248232;
+  background: #F5F5F5; /* lighter */
+  border-radius: 3px;
+  padding: 4px;
 }
 .remark-slide-number {
   color: #C8C7C8;
@@ -136,7 +138,7 @@ a, a > code {
   position: absolute;
   text-align: center;
   bottom: 15px;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 .remark-code-line-highlighted {
   background-color: var(--code-highlight-color);

@@ -609,6 +609,19 @@ done
 ```
 ]
 
+.panel[.panel-name[Windows cmd]
+```vbscript
+FOR %i IN (01,02,03,04,05,06,07,08,09,10,11,12) DO ( 
+
+t.rast.series input=lst_daily method=average where="strftime('%m', start_time)='%i'" output=lst_average_%i
+
+t.rast.series input=lst_daily method=minimum where="strftime('%m', start_time)='%i'" output=lst_minimum_%i
+
+t.rast.series input=lst_daily method=maximum where="strftime('%m', start_time)='%i'" output=lst_maximum_%i
+)
+```
+]
+
 .panel[.panel-name[Output]
 .center[<img src="assets/img/list_long_term_avg_lst.png" width="70%">]
 ]
