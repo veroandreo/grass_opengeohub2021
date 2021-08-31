@@ -130,7 +130,7 @@ class: grass-slide
 - Strong user community, commercial support
 - Large amount of tools: 500+ [core modules](#modules), 300+ [addons](#addons)
 - GUI and CLI interfaces
-- Python API and libraries
+- Python API and libraries - new `grass.jupyter` library can be tried [online](https://mybinder.org/v2/gh/OSGeo/grass/c173461?urlpath=lab%2Ftree%2Fdoc%2Fnotebooks%2Fgrass_jupyter.ipynb)
 - Connection with R, QGIS, WPS, etc.
 - Different data types supported: [raster](https://grass.osgeo.org/grass-stable/manuals/rasterintro.html) (including [satellite imagery](https://grass.osgeo.org/grass-stable/manuals/imageryintro.html)), [3D raster or voxel](https://grass.osgeo.org/grass-stable/manuals/raster3dintro.html), [vector](https://grass.osgeo.org/grass-stable/manuals/vectorintro.html) and [space-time datasets](https://grass.osgeo.org/grass-stable/manuals/temporalintro.html) 
 
@@ -172,131 +172,18 @@ g.extension extension=r3.slice \
 ``` 
 
 ---
-class: grass-slide, hide_logo, center
-
-# Different interfaces
-
-GRASS GIS offers different interfaces for the interaction between user and software. 
-
-#### Let's see some of them!
-
----
-layout: true
 
 ### Graphical User Interface (GUI)
 
----
-
-.left-column[
-GRASS 7+
-]
-
-.right-column[
-<img src="assets/img/GUI_description.png" width="870px">
-]
+<center><img src="assets/img/GUI_description.png" width="870px"></center>
 
 ---
-
-.left-column[
-GRASS 8
-]
-
-.right-column[
-<img src="https://grass.osgeo.org/images/news/grassgui8_first_infobar.png" width="950px">
-]
-
----
-
-.left-column[
-GRASS 8+
-
-Upcoming option to switch between multiple and single window interface
-]
-
-.right-column[
-<img src="assets/img/grass_single_window.png" width="950px">
-]
-
----
-layout: false
 
 ### `r fa("terminal")` Command line 
 
 <center><img src="assets/img/grass_command_line.png" width="65%"></center>
 
 ---
-layout: true
-
-### `r fa("python")` Python 
-
----
-
-- 2 libraries delivered with GRASS GIS: **grass** and **pygrass**, that provide access to modules and internal C functions
-- 1 external library: [**grass-session**](https://github.com/zarch/grass-session) that can be installed with `pip`
-
-<center><img src="assets/img/simple_python_editor.png" width="63%"></center>
-
----
-
-... write your Python script and run it from CLI or GUI:
-
-```python
-#!/usr/bin/env python
-
-# simple example of pyGRASS usage: raster processing via modules approach
-from grass.pygrass.modules.shortcuts import general as g
-from grass.pygrass.modules.shortcuts import raster as r
-g.message("Filter elevation map by a threshold...")
- 
-# set computational region
-input = 'elevation'
-g.region(raster=input)
-output = 'elev_100m'
-thresh = 100.0
-
-r.mapcalc("%s = if(%s > %d, %s, null())" % (output, input, thresh, input), overwrite = True)
-r.colors(map=output, color="elevation")
-``` 
----
-
-... or use GRASS and Python within Jupyter Lab/notebooks via **grass.jupyter**: a new library under development that will come with GRASS 8
-
-.pull-left[.center[
-<img src="assets/img/grass_jupyter.png" width="75%">]]
-
-.pull-right[
-# `r emo::ji("star_struck")`
-
-<br>Curious?? Try yourself [here](https://mybinder.org/v2/gh/OSGeo/grass/599cdff029ea0d5279c33dd83b4d868c4bd86fb4?urlpath=lab%2Ftree%2Fdoc%2Fnotebooks%2Fjupyter_integration.ipynb)
-]
-
----
-layout: true
-
-### QGIS
-
----
-
-.right-column[
-<img src="assets/img/qgis_grass_plugin.png" width="99%">
-]
-
-.left-column[
-[GRASS GIS plugin](https://docs.qgis.org/3.16/en/docs/user_manual/grass_integration/grass_integration.html)
-]
-
----
-
-.right-column[
-<img src="assets/img/qgis_processing.png" width="99%">
-]
-
-.left-column[
-[Processing toolbox](https://docs.qgis.org/3.16/en/docs/user_manual/processing/toolbox.html)
-]
-
----
-layout: false
 
 ### GRASS + `r fa("r-project", fill="#276dc2")` through rgrass7 package
 
@@ -313,7 +200,7 @@ class: grass-slide center
 
 ## The TGRASS framework
 
-.left[GRASS GIS is the first FOSS GIS that incorporated capabilities to *manage, analyze, process and visualize spatio-temporal data*, as well as the temporal relationships among time series.]
+.left[GRASS GIS was the first FOSS GIS that incorporated capabilities to *manage, analyze, process and visualize spatio-temporal data*, as well as the temporal relationships among time series.]
 
 - TGRASS is fully **based on metadata** and does not duplicate any dataset
 - **Snapshot** approach, i.e., adds time stamps to maps
@@ -390,13 +277,13 @@ class: grass-slide
 
 ### Demo session overview
 
-> .center[Habitat suitability mapping for the Asian tiger mosquito in Northern Italy based on variables derived from LST data]
+> .center[Habitat suitability mapping for the Asian tiger mosquito in Northern Italy based on variables derived from daily LST data]
 
 .pull-left[
 - **GRASS**
   - Import species records
   - Create random background points
-  - Create different environmental layers from LST daily data
+  - Create different environmental layers from daily LST data
 ]
 
 .pull-right[
@@ -413,7 +300,6 @@ class: grass-slide
 
 
 .center[<img src="assets/img/sdm_workflow_edited.png" width="72%">]
-
 
 ---
 
@@ -1185,7 +1071,7 @@ myBiomodProj <- BIOMOD_Projection(
 mod_proj <- get_predictions(myBiomodProj)
 
 # Plot predicted model with highest ROC
-mapview(mod_proj[[max_roc]])
+mapview(mod_proj[[max_roc]]) 
 ```
 ]
 
@@ -1225,7 +1111,7 @@ execGRASS("g.list", parameters = list(type = "raster",
 ```{r ref.label='write_raster_grass', message=FALSE, warning=FALSE, echo=FALSE, highlight.output = TRUE}
 # Check it's there
 execGRASS("g.list", parameters = list(type = "raster", 
-                                      pattern = "maxent*"))
+                                      pattern = "maxent*")) 
 ```
 ]
 ]
@@ -1243,7 +1129,7 @@ This is only a toy example and only the beginning...
 - model validation with independent data
 - uncertainty: where we can predict with confidence
 - many other relevant packages: 
-  - [dismo](https://cran.r-project.org/web/packages/dismo/index.html), [sdm](https://cran.r-project.org/web/packages/sdm/index.html), [SDMtune](https://cran.r-project.org/web/packages/SDMtune/index.html), [kuenm](https://github.com/marlonecobos/kuenm), [caret](https://cran.r-project.org/web/packages/caret/index.html), [CAST](https://cran.r-project.org/web/packages/CAST/index.html), etc.
+  - [*dismo*](https://cran.r-project.org/web/packages/dismo/index.html), [*sdm*](https://cran.r-project.org/web/packages/sdm/index.html), [*SDMtune*](https://cran.r-project.org/web/packages/SDMtune/index.html), [*kuenm*](https://github.com/marlonecobos/kuenm), [*caret*](https://cran.r-project.org/web/packages/caret/index.html), [*CAST*](https://cran.r-project.org/web/packages/CAST/index.html), etc.
 
 ---
 class: center, middle
@@ -1278,13 +1164,13 @@ class: center, middle
 - [Temporal data processing wiki](https://grasswiki.osgeo.org/wiki/Temporal_data_processing)
 - [GRASS GIS and R for time series processing wiki](https://grasswiki.osgeo.org/wiki/Temporal_data_processing/GRASS_R_raster_time_series_processing)
 - [GRASS GIS temporal workshop at NCSU](http://ncsu-geoforall-lab.github.io/grass-temporal-workshop/)
-- [GRASS GIS workshop held in Jena 2018](http://training.gismentors.eu/grass-gis-workshop-jena-2018/index.html)
-- [GRASS GIS course IRSAE 2018](http://training.gismentors.eu/grass-gis-irsae-winter-course-2018/index.html)
-- [GRASS GIS course in Argentina 2018](https://gitlab.com/veroandreo/curso-grass-gis-rioiv)
+- [GRASS GIS workshop held in Jena](http://training.gismentors.eu/grass-gis-workshop-jena-2018/index.html)
+- [GRASS GIS course IRSAE](http://training.gismentors.eu/grass-gis-irsae-winter-course-2018/index.html)
+- [GRASS GIS course in Argentina](https://gitlab.com/veroandreo/curso-grass-gis-rioiv)
 
 ---
 
-## `r emo::ji("book")` GRASS References 
+## `r emo::ji("book")` GRASS and TGRASS References 
 
 - Neteler, M., Mitasova, H. (2008): *Open Source GIS: A GRASS GIS Approach*. Third edition. ed. Springer, New York. [Book site](https://grassbook.org/)
 - Neteler, M., Bowman, M.H., Landa, M. and Metz, M. (2012): *GRASS GIS: a multi-purpose Open Source GIS*. Environmental Modelling & Software, 31: 124-130 [DOI](http://dx.doi.org/10.1016/j.envsoft.2011.11.014)
@@ -1301,7 +1187,7 @@ class: center middle hide_logo
 Have a look at the amazing list of [workshops](https://2021.foss4g.org/schedule/workhops.html) and [talks](https://2021.foss4g.org/schedule/full-schedule.html) offered and [register](https://registration.2021.foss4g.org/OSGeo/FOSS4G/)!
 ]
 
-<img src="https://registration.2021.foss4g.org/media/pub/thumbs/fccad5b3f7e82c69e51a33ac42bdd536.5000x120.png" width="40%">
+<img src="https://registration.2021.foss4g.org/media/pub/thumbs/fccad5b3f7e82c69e51a33ac42bdd536.5000x120.png" width="35%">
 
 ---
 class: center hide_logo
@@ -1317,6 +1203,130 @@ class: center hide_logo
 class: grass-slide middle center
 
 # Extra slides
+
+---
+class: grass-slide, hide_logo, center
+
+# Different interfaces
+
+GRASS GIS offers different interfaces for the interaction between user and software. 
+
+---
+layout: true
+
+### Graphical User Interface (GUI)
+
+---
+
+.left-column[
+GRASS 7+
+]
+
+.right-column[
+<img src="assets/img/GUI_description.png" width="870px">
+]
+
+---
+
+.left-column[
+GRASS 8
+]
+
+.right-column[
+<img src="https://grass.osgeo.org/images/news/grassgui8_first_infobar.png" width="950px">
+]
+
+---
+
+.left-column[
+GRASS 8+
+
+Upcoming option to switch between multiple and single window interface
+]
+
+.right-column[
+<img src="assets/img/grass_single_window.png" width="950px">
+]
+
+---
+layout: true
+
+### `r fa("python")` Python 
+
+---
+
+- 2 libraries delivered with GRASS GIS: **grass** and **pygrass**, that provide access to modules and internal C functions
+- 1 external library: [**grass-session**](https://github.com/zarch/grass-session) that can be installed with `pip`
+
+<center><img src="assets/img/simple_python_editor.png" width="63%"></center>
+
+---
+
+... write your Python script and run it from CLI or GUI:
+
+```python
+#!/usr/bin/env python
+
+# simple example of pyGRASS usage: raster processing via modules approach
+from grass.pygrass.modules.shortcuts import general as g
+from grass.pygrass.modules.shortcuts import raster as r
+g.message("Filter elevation map by a threshold...")
+ 
+# set computational region
+input = 'elevation'
+g.region(raster=input)
+output = 'elev_100m'
+thresh = 100.0
+
+r.mapcalc("%s = if(%s > %d, %s, null())" % (output, input, thresh, input), overwrite = True)
+r.colors(map=output, color="elevation")
+``` 
+---
+
+... or use GRASS and Python within Jupyter Lab/notebooks via **grass.jupyter**: a new library under development that will come with GRASS 8
+
+.pull-left[.center[
+<img src="assets/img/grass_jupyter.png" width="75%">]]
+
+.pull-right[
+# `r emo::ji("star_struck")`
+
+<br>Curious?? Try yourself [here](https://mybinder.org/v2/gh/OSGeo/grass/c173461?urlpath=lab%2Ftree%2Fdoc%2Fnotebooks%2Fgrass_jupyter.ipynb)
+]
+
+---
+layout: true
+
+### QGIS
+
+---
+
+.right-column[
+<img src="assets/img/qgis_grass_plugin.png" width="99%">
+]
+
+.left-column[
+[GRASS GIS plugin](https://docs.qgis.org/3.16/en/docs/user_manual/grass_integration/grass_integration.html)
+]
+
+---
+
+.right-column[
+<img src="assets/img/qgis_processing.png" width="99%">
+]
+
+.left-column[
+[Processing toolbox](https://docs.qgis.org/3.16/en/docs/user_manual/processing/toolbox.html)
+]
+
+---
+layout: false
+
+### GRASS + `r fa("r-project", fill="#276dc2")` through rgrass7 package
+
+We can use [R within a GRASS GIS session](https://grasswiki.osgeo.org/wiki/R_statistics/rgrass7#R_within_GRASS) or use [GRASS GIS within an R session](https://grasswiki.osgeo.org/wiki/R_statistics/rgrass7#GRASS_within_R)
+
+<center><img src="assets/img/RwithinGRASS_and_Rstudio_from_grass.png" width="75%"></center>
 
 ---
 name: grass-database-slide
