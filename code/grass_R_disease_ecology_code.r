@@ -234,7 +234,7 @@ mapview(mod_proj[[max_roc]])
 
 
 # Only one layer
-g <- as(mod_proj[[4]], 'SpatialGridDataFrame')
+g <- as(mod_proj[[max_roc]], 'SpatialGridDataFrame')
 writeRAST(g, "maxent_albopictus", flags = "overwrite")
 
 # Export all MaxEnt runs

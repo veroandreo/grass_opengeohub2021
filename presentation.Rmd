@@ -128,7 +128,7 @@ class: grass-slide
 
 - Free and open source, you can use, modify, improve, share
 - Strong user community, commercial support
-- Large amount of tools: 500+ [core modules](#modules), 400+ [addons](#addons)
+- Large amount of tools: 500+ [core modules](#modules), 300+ [addons](#addons)
 - GUI and CLI interfaces
 - Python API and libraries
 - Connection with R, QGIS, WPS, etc.
@@ -1205,7 +1205,7 @@ mapview(mod_proj[[max_roc]]) + Aa_pres
 .panel[.panel-name[R code]
 ```{r write_raster_grass, message=FALSE, warning=FALSE, results='hide'}
 # Export only one layer
-g <- as(mod_proj[[2]], 'SpatialGridDataFrame')
+g <- as(mod_proj[[max_roc]], 'SpatialGridDataFrame')
 writeRAST(g, "maxent_albopictus", flags = "overwrite")
 
 # Export all MaxEnt runs
