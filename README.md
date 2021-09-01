@@ -15,7 +15,7 @@ through standalone installers/binaries or through
 
 There are two different options:
 1. [Standalone installer 64-bit](https://grass.osgeo.org/grass78/binary/mswindows/native/x86_64/WinGRASS-7.8.5-2-Setup-x86_64.exe) 
-2. [OSGeo4W 64-bit](http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe) 
+2. [OSGeo4W 64-bit](http://download.osgeo.org/osgeo4w/v2/osgeo4w-setup.exe) 
 
 For Windows users, **we strongly recommend installing GRASS GIS through the OSGeo4W package** (second option), 
 since it allows to install all OSGeo software. See this 
