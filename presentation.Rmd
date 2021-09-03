@@ -1160,11 +1160,10 @@ class: center, middle
 
 - [GRASS intro workshop held at NCSU](https://ncsu-osgeorel.github.io/grass-intro-workshop/)
 - [Unleash the power of GRASS GIS at US-IALE 2017](https://grasswiki.osgeo.org/wiki/Unleash_the_power_of_GRASS_GIS_at_US-IALE_2017)
-- [GRASS GIS course in Jena 2018](http://training.gismentors.eu/grass-gis-workshop-jena-2018/index.html)
 - [Temporal data processing wiki](https://grasswiki.osgeo.org/wiki/Temporal_data_processing)
 - [GRASS GIS and R for time series processing wiki](https://grasswiki.osgeo.org/wiki/Temporal_data_processing/GRASS_R_raster_time_series_processing)
 - [GRASS GIS temporal workshop at NCSU](http://ncsu-geoforall-lab.github.io/grass-temporal-workshop/)
-- [GRASS GIS workshop held in Jena](http://training.gismentors.eu/grass-gis-workshop-jena-2018/index.html)
+- [GRASS GIS course in Jena](https://training.gismentors.eu/grass-gis-workshop-jena/index.html)
 - [GRASS GIS course IRSAE](http://training.gismentors.eu/grass-gis-irsae-winter-course-2018/index.html)
 - [GRASS GIS course in Argentina](https://gitlab.com/veroandreo/curso-grass-gis-rioiv)
 
